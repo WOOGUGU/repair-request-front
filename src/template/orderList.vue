@@ -2,7 +2,7 @@
     <el-card>
         <el-table :data="tableData" style="width: 100%">
             <el-table-column prop="workorderNumber" label="工单号" width="85px" />
-            <el-table-column prop="workorderContent" label="工单内容" />
+            <el-table-column prop="workorderContent" label="工单内容" min-width="140px" />
             <el-table-column prop="address" label="地址" width="140px" />
             <el-table-column prop="createTime" label="创建时间" width="220px" />
             <el-table-column prop="fixedTime" label="维修时间段" width="140px" />
@@ -22,95 +22,46 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-const currentPage = ref(1)
-const disabled = ref(false)
+import { reviewOrderList } from "@/api/order"
 
-interface User {
-    date: string
-    name: string
+interface order {
+    workorderNumber: number
+    initiationTime: string
+    contactInformation: string
     address: string
+    workorderContent: string
+    pictureAddress: string
+    fixedTime: string
+    evaluationStatus: string
+    maintenanceSatisfaction: number | null
+    evaluation: string | null
+    workorderState: string
+    fkStudentNumber: number
+    createTime: string
+    updateTime: string | null
+    deleted: number
+    version: number
 }
 
-const handleDelete = (index: number, row: User) => {
+var tableData = ref([]);
+const currentPage = ref(1)
+const disabled = ref(true)
+
+const handleDelete = (index: number, row: order) => {
     console.log("index", index);
     console.log("row", row);
 }
-
-const tableData = [
-    {
-        "workorderNumber": 90,
-        "initiationTime": "2022-05-03 11:15:16",
-        "contactInformation": "12111112222",
-        "address": "信息技术中心102",
-        "workorderContent": "网速太慢了",
-        "pictureAddress": "{\"0\":\"https://repair.woogugu.cn/a4161057-bca5-4e30-81f7-3ebafda7cc19.png\"}",
-        "fixedTime": "9:00--10:00",
-        "evaluationStatus": "1",
-        "maintenanceSatisfaction": null,
-        "evaluation": null,
-        "workorderState": "1",
-        "fkStudentNumber": 1,
-        "createTime": "2022-05-03 11:15:16",
-        "updateTime": null,
-        "deleted": 0,
-        "version": 1
-    },
-    {
-        "workorderNumber": 89,
-        "initiationTime": "2022-04-28 08:58:12",
-        "contactInformation": "13111115555",
-        "address": "西八520",
-        "workorderContent": "拨号失败",
-        "pictureAddress": "{}",
-        "fixedTime": "9:00--10:00",
-        "evaluationStatus": "1",
-        "maintenanceSatisfaction": null,
-        "evaluation": null,
-        "workorderState": "1",
-        "fkStudentNumber": 1,
-        "createTime": "2022-04-28 08:58:12",
-        "updateTime": null,
-        "deleted": 0,
-        "version": 1
-    },
-    {
-        "workorderNumber": 88,
-        "initiationTime": "2022-04-28 08:58:01",
-        "contactInformation": "13111115555",
-        "address": "西八520",
-        "workorderContent": "拨号失败",
-        "pictureAddress": "{}",
-        "fixedTime": "9:00--10:00",
-        "evaluationStatus": "1",
-        "maintenanceSatisfaction": null,
-        "evaluation": null,
-        "workorderState": "1",
-        "fkStudentNumber": 1,
-        "createTime": "2022-04-28 08:58:01",
-        "updateTime": null,
-        "deleted": 0,
-        "version": 1
-    },
-    {
-        "workorderNumber": 86,
-        "initiationTime": "2022-04-11 23:56:00",
-        "contactInformation": "123456",
-        "address": "北十",
-        "workorderContent": "123",
-        "pictureAddress": "{\"0\":\"https://repair.woogugu.cn/2487ee62-3e83-4724-9a7a-26bfbdd0e336.jpg\"}",
-        "fixedTime": "9:00--10:00",
-        "evaluationStatus": "1",
-        "maintenanceSatisfaction": null,
-        "evaluation": null,
-        "workorderState": "1",
-        "fkStudentNumber": 1911111111,
-        "createTime": "2022-04-11 23:56:00",
-        "updateTime": null,
-        "deleted": 0,
-        "version": 1
+const getTableData = async (state: "review" | "repair" | "complete") => {
+    var res;
+    switch (state) {
+        case "review":
+            res = await reviewOrderList();
     }
-];
+    console.log(res)
+    tableData.value = res.data;
+}
 
+getTableData("review")
 </script>
 
 <style lang="less" scoped>

@@ -136,7 +136,7 @@ const defaultActive = sessionStorage.getItem("path") || "/home";
 
 const changeCollapse = () => {
   collapse.value = !collapse.value;
-  asideWidth.value = asideWidth.value === "200px" ? "63px" : "200px";
+  asideWidth.value = asideWidth.value === "200px" ? "64px" : "200px";
   console.log(collapse.value);
 };
 
