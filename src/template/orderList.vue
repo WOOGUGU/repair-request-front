@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { reviewOrderList } from "@/api/order"
+import { reviewOrderList, repairOrderList, completeOrderList } from "@/api/order"
 
 interface order {
     workorderNumber: number
@@ -56,6 +56,13 @@ const getTableData = async (state: "review" | "repair" | "complete") => {
     switch (state) {
         case "review":
             res = await reviewOrderList();
+            break;
+        case "repair":
+            res = await repairOrderList();
+            break;
+        case "complete":
+            res = await completeOrderList();
+            break;
     }
     console.log(res)
     tableData.value = res.data;

@@ -10,7 +10,7 @@ export const reviewOrderList = async () => {
 };
 
 // 待维修
-export const repairOrder = async () => {
+export const repairOrderList = async () => {
   var res = await request({
     url: "/administer/orderlist2",
     method: "get",
@@ -19,7 +19,7 @@ export const repairOrder = async () => {
 };
 
 // 已完成
-export const completeOrder = async () => {
+export const completeOrderList = async () => {
   var res = await request({
     url: "/administer/orderlist3",
     method: "get",
