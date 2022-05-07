@@ -9,56 +9,61 @@
             <el-table-column prop="tel" label="联系方式" width="150px" />
             <el-table-column label="操作" fixed="right" width="75px">
                 <template #default="scope">
-                    <el-button color="#626aef" @click="handleDelete(scope.$index, scope.row)" size="small" plain>查看
+                    <el-button color="#626aef" @click="handleDelete(scope.$index, scope.row)" size="small" plain>
+                        查看
                     </el-button>
                 </template>
             </el-table-column>
         </el-table>
-        <br>
+        <br />
         <el-pagination v-model:currentPage="currentPage" :page-size="tableData.length" :disabled="disabled"
             layout="total, prev, pager, next, jumper" :total="tableData.length" />
     </el-card>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { selectOrderList, orderParam } from "@/api/order"
+import { ref } from "vue";
+import { selectOrderList, orderParam } from "@/api/order";
+
+const props = defineProps({
+    state: Number,
+});
 
 interface order {
-    workorderNumber: number
-    initiationTime: string
-    contactInformation: string
-    address: string
-    workorderContent: string
-    pictureAddress: string
-    fixedTime: string
-    evaluationStatus: string
-    maintenanceSatisfaction: number | null
-    evaluation: string | null
-    workorderState: string
-    fkStudentNumber: number
-    createTime: string
-    updateTime: string | null
-    deleted: number
-    version: number
+    des: string;
+    feedback: string | null;
+    id: number;
+    position: string;
+    progress: number;
+    remark: string | null;
+    sender: string;
+    solver: string | null;
+    stars: string | null;
+    tel: string;
+    timeDistribution: string | null;
+    timeEnd: string | null;
+    timeStart: string;
+    timeSubscribe: string;
+    type: string;
+    username: string;
 }
 
 let tableData = ref([]);
-const currentPage = ref(1)
-const disabled = ref(true)
+const currentPage = ref(1);
+const disabled = ref(true);
 
 const handleDelete = (index: number, row: order) => {
     console.log("index", index);
     console.log("row", row);
-}
-const getTableData = async (state: number) => {
+};
+const getTableData = async (state: number | undefined) => {
     let params: orderParam = { progress: state };
-    let res = await selectOrderList(params)
-    // console.log("res:", res)
+    let res = await selectOrderList(params);
+    console.log("res:", res);
     tableData.value = res.data;
-}
+};
 
-getTableData(0)
+getTableData(props.state);
 </script>
 
 <style lang="less" scoped>

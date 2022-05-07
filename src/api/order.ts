@@ -11,7 +11,7 @@ export interface orderParam {
 }
 
 export const selectOrderList = async (rs: orderParam) => {
-  // console.log("rs:", rs);
+  console.log("rs:", rs);
   let res = await request({
     headers: {
       "Content-Type": "application/json;",
