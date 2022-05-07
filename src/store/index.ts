@@ -7,7 +7,7 @@ export const mainStore = defineStore(Names.Main, {
     return {
       userNumber: "",
       userName: "",
-      toKen: "",
+      telephoneNumber: "",
     };
   },
   getters: {},

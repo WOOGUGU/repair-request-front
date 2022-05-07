@@ -18,7 +18,8 @@ export default defineConfig({
     // 反向代理
     proxy: {
       "/api-dev": {
-        target: "https://repair.woogugu.cn/",
+        // target: "https://repair.woogugu.cn/",
+        target: "https://wrz.lty923.com/",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api-dev/, ""),
       },

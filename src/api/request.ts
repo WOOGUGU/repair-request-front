@@ -2,7 +2,6 @@ import axios, { AxiosInstance } from "axios";
 
 const service: AxiosInstance = axios.create({
   baseURL: "/api-dev",
-  // baseURL: "https://repair.woogugu.cn/",
   timeout: 5000,
 });
 

@@ -27,14 +27,14 @@ import { reactive, ref } from "vue";
 import { Key, User } from "@element-plus/icons-vue";
 import { ElMessage, FormInstance, FormRules } from "element-plus";
 import { mainStore } from "@/store";
-import { administerLogin } from "@/api/login";
+import { login, checkPermissions } from "@/api/login";
 import router from "@/router";
 
 const store = mainStore();
 
 const loginTable = reactive({
-  usernumber: "9999",
-  password: "1234567",
+  usernumber: "admin",
+  password: "",
 });
 
 // 表单校验
@@ -49,29 +49,25 @@ const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate(async (valid, fields) => {
     if (valid) {
-      const res = await administerLogin(loginTable);
-      if (res.code === 200) {
-        store.userNumber = res.data.jobNumber;
+      const res = await login(loginTable);
+      if (!checkPermissions(res.data.authorities, "ROLE_admin")) {
+        ElMessage({ showClose: true, message: "登入失败：无管理员权限", type: "error", });
+        return;
+      }
+      if (res.code === "00000") {
+        store.userNumber = res.data.username;
         store.userName = res.data.name;
-        ElMessage({
-          showClose: true,
-          message: "登入成功，即将跳转~",
-          type: "success",
-          duration: 900,
-        });
+        store.telephoneNumber = res.data.tel;
+        ElMessage({ showClose: true, message: "登入成功，即将跳转~", type: "success", duration: 900, });
         setTimeout(() => {
           router.push("/");
         }, 1000);
       } else {
-        ElMessage({
-          showClose: true,
-          message: "登入失败：" + res.message,
-          type: "error",
-        });
+        ElMessage({ showClose: true, message: "登入失败：" + res.userMsg, type: "error", });
       }
-      // console.log("res:", res);
+      console.log("res:", res);
     } else {
-      console.log("登入失败!", fields);
+      console.log("错误!", fields);
     }
   });
 };
