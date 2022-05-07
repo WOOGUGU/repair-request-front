@@ -1,28 +1,24 @@
 import request from "./request";
 
-// 待处理
-export const reviewOrderList = async () => {
-  var res = await request({
-    url: "/administer/orderlist",
-    method: "get",
-  });
-  return res;
-};
+export interface orderParam {
+  orderId?: string;
+  position?: string;
+  progress?: number;
+  sender?: string;
+  solver?: string;
+  type?: string;
+  username?: string;
+}
 
-// 待维修
-export const repairOrderList = async () => {
-  var res = await request({
-    url: "/administer/orderlist2",
+export const selectOrderList = async (rs: orderParam) => {
+  // console.log("rs:", rs);
+  let res = await request({
+    headers: {
+      "Content-Type": "application/json;",
+    },
+    url: "/v2/order/selectOrder",
     method: "get",
-  });
-  return res;
-};
-
-// 已完成
-export const completeOrderList = async () => {
-  var res = await request({
-    url: "/administer/orderlist3",
-    method: "get",
+    params: rs,
   });
   return res;
 };
