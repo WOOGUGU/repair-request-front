@@ -7,6 +7,7 @@ type loginTable = {
   password: string;
 };
 
+// 登入接口
 export const login = async (rs: loginTable) => {
   // console.log(rs);
   let res = await request({
@@ -20,6 +21,7 @@ export const login = async (rs: loginTable) => {
   return res;
 };
 
+// 判断用户权限等级
 export const checkPermissions = (
   authorities: any[],
   authority: "ROLE_admin" | "ROLE_user" | "ROLE_repairman"
@@ -30,4 +32,14 @@ export const checkPermissions = (
     }
   }
   return false;
+};
+
+// 获取JESSIONID是否有效
+export const jsessionidIsExpired = async () => {
+  let res = await request({
+    url: "/v2/inner/isExpired",
+    method: "get",
+  });
+  console.log("res", res);
+  return res;
 };

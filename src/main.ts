@@ -6,6 +6,7 @@ import locale from "element-plus/lib/locale/lang/zh-cn";
 import { createPinia } from "pinia";
 import "element-plus/dist/index.css";
 import "./assets/css/all.css";
+import "@/router/permission.ts";
 
 const store = createPinia();
 let app = createApp(App);
