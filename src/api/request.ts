@@ -1,4 +1,6 @@
+import { ElMessage } from "element-plus";
 import axios, { AxiosInstance } from "axios";
+import router from "@/router";
 
 const service: AxiosInstance = axios.create({
   baseURL: "/api-dev",
@@ -23,9 +25,21 @@ service.interceptors.response.use(
     // 响应拦截器
     // console.log("响应拦截器");
     let data = res.data;
+
     return data;
   },
   (error) => {
+    console.log("error", error.response);
+    if (error.response.status === 401) {
+      router.push("/login");
+      ElMessage({
+        showClose: true,
+        message: "登录过期，请重新登录",
+        type: "error",
+        duration: 1000,
+      });
+      return Promise.reject(new Error("登录过期"));
+    }
     return Promise.reject(new Error(error));
   }
 );

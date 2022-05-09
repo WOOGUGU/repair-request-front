@@ -58,10 +58,10 @@ const submitForm = (formEl: FormInstance | undefined) => {
         store.userNumber = res.data.username;
         store.userName = res.data.name;
         store.telephoneNumber = res.data.tel;
-        ElMessage({ showClose: true, message: "登入成功，即将跳转~", type: "success", duration: 900, });
+        ElMessage({ showClose: true, message: "登入成功，即将跳转~", type: "success", duration: 750, });
         setTimeout(() => {
           router.push("/");
-        }, 1000);
+        }, 800);
       } else {
         ElMessage({ showClose: true, message: "登入失败：" + res.userMsg, type: "error", });
       }
