@@ -34,10 +34,10 @@ export const checkPermissions = (
   return false;
 };
 
-// 获取JESSIONID是否有效
-export const jsessionidIsExpired = async () => {
+// 通过session获取用户信息
+export const getUserInfo = async () => {
   let res = await request({
-    url: "/v2/inner/isExpired",
+    url: "/v2/inner/getUserInfo",
     method: "get",
   });
   console.log("res", res);
