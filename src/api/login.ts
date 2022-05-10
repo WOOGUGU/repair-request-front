@@ -40,6 +40,5 @@ export const getUserInfo = async () => {
     url: "/v2/inner/getUserInfo",
     method: "get",
   });
-  console.log("res", res);
   return res;
 };

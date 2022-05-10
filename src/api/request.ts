@@ -29,7 +29,7 @@ service.interceptors.response.use(
     return data;
   },
   (error) => {
-    console.log("error", error.response);
+    // console.log("error", error.response);
     if (error.response.status === 401) {
       router.push("/login");
       ElMessage({
