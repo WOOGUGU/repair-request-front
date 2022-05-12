@@ -1,5 +1,7 @@
 <template>
-    <orderList :state="state" />
+    <el-card>
+        <orderList :state="state" />
+    </el-card>
 </template>
 
 <script setup lang="ts">
