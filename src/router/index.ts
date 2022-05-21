@@ -20,17 +20,17 @@ const routes = [
       {
         path: "/repairOrder",
         name: "repairOrder",
-        component: () => import("../views/repairOrder/index.vue"),
+        component: () => import("../views/orderList/repairOrder/index.vue"),
       },
       {
         path: "/completeOrder",
         name: "completeOrder",
-        component: () => import("../views/completeOrder/index.vue"),
+        component: () => import("../views/orderList/completeOrder/index.vue"),
       },
       {
         path: "/reviewOrder",
         name: "reviewOrder",
-        component: () => import("../views/reviewOrder/index.vue"),
+        component: () => import("../views/orderList/reviewOrder/index.vue"),
       },
     ],
   },
