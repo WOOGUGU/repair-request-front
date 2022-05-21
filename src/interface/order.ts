@@ -1,9 +1,9 @@
 export interface order {
     des: string;
     feedback: string | null;
-    id: number;
+    id: number | null;
     position: string;
-    progress: number;
+    progress: number | null;
     remark: string | null;
     sender: string;
     solver: string | null;
@@ -15,4 +15,5 @@ export interface order {
     timeSubscribe: string;
     type: string;
     username: string;
+    imgPath: string;
 }
