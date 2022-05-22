@@ -26,18 +26,22 @@
 import { ref } from "vue";
 import { selectOrderList, orderParam } from "@/api/order";
 import { order } from "@/interface/order";
+import router from "@/router";
+import { useRouter } from 'vue-router'
 
 const props = defineProps({
     state: Number,
 });
 
 let tableData = ref([]);
+const userRouter = useRouter()
 const currentPage = ref(1);
 const disabled = ref(true);
 
 const handleDetails = (index: number, row: order) => {
     console.log("index", index);
-    console.log("row", row);
+    console.log("row", row.id);
+    userRouter.push({ path: "/order", query: { orderId: row.id } });
 };
 const getTableData = async (state: number | undefined) => {
     let params: orderParam = { progress: state };

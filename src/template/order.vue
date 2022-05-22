@@ -117,53 +117,27 @@
 </template>
 
 <script setup lang="ts">
-import { h, reactive, ref } from 'vue';
+import { ref, Ref } from 'vue';
 import { order } from '@/interface/order';
-import { ElDivider } from 'element-plus'
+import { selectOrderList, orderParam } from "@/api/order";
+import { useRoute } from 'vue-router'
 
-const spacer = h(ElDivider, { direction: 'vertical' })
-const orderTable: order = reactive({
-    //     id: null,
-    //     username: "",
-    //     sender: "",
-    //     tel: "",
-    //     type: "",
-    //     des: "",
-    //     position: "",
-    //     timeSubscribe: "",
-    //     progress: null,
-    //     solver: "",
-    //     timeStart: "",
-    //     timeDistribution: "",
-    //     timeEnd: "",
-    //     feedback: "",
-    //     stars: "",
-    //     remark: "",
-    //     imgPath: "",
-    // }
-    //     {
-    "id": 19,
-    "username": "user",
-    "sender": "_user",
-    "tel": "17797700864",
-    "type": "wire",
-    "des": "无线网络没有弹窗故障描述故障描述故障描述故障描述",
-    "position": "行政楼201-A",
-    "timeSubscribe": "2022-05-25 10:00-11:00",
-    "progress": 2,
-    "solver": "_repairman 17797700864",
-    "timeStart": "2022-05-22 17:31:06",
-    "timeDistribution": "2022-05-22 17:32:00",
-    "timeEnd": "2022-05-22 17:32:53",
-    "feedback": "维修员留言维修员留言维修员留言维修员留言",
-    "stars": null,
-    "remark": "管理员留言管理员留言管理员留言管理员留言",
-    "imgPath": "[]"
-});
-const imgPathList = ref(orderTable.imgPath == null ? [] : orderTable.imgPath.split("]")[0].split("[")[1].split(","))
-
+let orderTable: Ref<order> = ref({});
+let imgPathList = ref()
 let imgNumber = ref(0);
 
+const route = useRoute()
+const getTableData = async (orderId: number | undefined) => {
+    let params: orderParam = { orderId: orderId };
+    let res = await selectOrderList(params);
+    // console.log("res:", res.data[0]);
+    orderTable.value = res.data[0];
+    imgPathList.value = orderTable.value.imgPath == null ? [] : orderTable.value.imgPath.split("]")[0].split("[")[1].split(",");
+    // console.log("orderTable", orderTable.value);
+    // console.log("imgPathList", imgPathList.value);
+};
+
+getTableData(Number(route.query.orderId));
 </script>
 
 <style lang="less" scoped>

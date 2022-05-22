@@ -1,7 +1,7 @@
 import request from "./request";
 
 export interface orderParam {
-  orderId?: string;
+  orderId?: number;
   position?: string;
   progress?: number;
   sender?: string;
