@@ -47,13 +47,18 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item label="故障描述">
-                    <el-input v-model="orderTable.des" type="textarea" />
+                    <el-input v-model="orderTable.des" autosize type="textarea" />
                 </el-form-item>
                 <el-form-item label="相关图片">
-                    <div v-for="img, item in imgPathList">
-                        <el-image style="width: 100px; height: 100px" :src="img" :initial-index="imgNumber"
-                            :preview-src-list="imgPathList" fit="scale-down" @mouseover="imgNumber = item" />
-                    </div>
+                    <el-space wrap>
+                        <div v-if="orderTable.imgPath !== '[]'" v-for="img, item in imgPathList">
+                            <el-image style="width: 125px; height: 125px" :src="img" :initial-index="imgNumber"
+                                :preview-src-list="imgPathList" fit="cover" @mouseover="imgNumber = item" />
+                        </div>
+                        <div v-else>
+                            <el-empty :image-size="60" style="width: 125px; height: 125px" description="无图片" />
+                        </div>
+                    </el-space>
                 </el-form-item>
             </el-card>
 
@@ -63,19 +68,15 @@
                         <span>用户信息</span>
                     </div>
                 </template>
-                <el-row>
-                    <el-col :span="12">
-                        创建人
-                    </el-col>
-                    <el-col :span="12">
-                        学号
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="12">
-                        联系方式
-                    </el-col>
-                </el-row>
+                <el-form-item label="创建人">
+                    <el-input v-model="orderTable.sender" placeholder="Please input" />
+                </el-form-item>
+                <el-form-item label="学号/工号">
+                    <el-input v-model="orderTable.username" placeholder="Please input" />
+                </el-form-item>
+                <el-form-item label="联系方式">
+                    <el-input v-model="orderTable.tel" placeholder="Please input" />
+                </el-form-item>
             </el-card>
 
             <el-card>
@@ -84,19 +85,15 @@
                         <span>审批信息</span>
                     </div>
                 </template>
-                <el-row>
-                    <el-col :span="12">
-                        管理员工号
-                    </el-col>
-                    <el-col :span="12">
-                        审批时间
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="24">
-                        管理员留言
-                    </el-col>
-                </el-row>
+                <el-form-item label="管理员工号">
+                    <el-input v-model="orderTable.solver" placeholder="Please input" />
+                </el-form-item>
+                <el-form-item label="审批时间">
+                    <el-input v-model="orderTable.timeDistribution" placeholder="Please input" />
+                </el-form-item>
+                <el-form-item label="管理员留言">
+                    <el-input v-model="orderTable.remark" autosize type="textarea" />
+                </el-form-item>
             </el-card>
 
             <el-card>
@@ -105,28 +102,26 @@
                         <span>维修信息</span>
                     </div>
                 </template>
-                <el-row>
-                    <el-col :span="12">
-                        维修员工号
-                    </el-col>
-                    <el-col :span="12">
-                        维修时间
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="24">
-                        维修员留言
-                    </el-col>
-                </el-row>
+                <el-form-item label="维修员工号">
+                    <el-input v-model="orderTable.solver" placeholder="Please input" />
+                </el-form-item>
+                <el-form-item label="维修时间">
+                    <el-input v-model="orderTable.timeDistribution" placeholder="Please input" />
+                </el-form-item>
+                <el-form-item label="维修员留言">
+                    <el-input v-model="orderTable.feedback" autosize type="textarea" />
+                </el-form-item>
             </el-card>
         </el-space>
     </el-form>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { h, reactive, ref } from 'vue';
 import { order } from '@/interface/order';
+import { ElDivider } from 'element-plus'
 
+const spacer = h(ElDivider, { direction: 'vertical' })
 const orderTable: order = reactive({
     //     id: null,
     //     username: "",
@@ -147,29 +142,28 @@ const orderTable: order = reactive({
     //     imgPath: "",
     // }
     //     {
-    "id": 17,
-    "username": "12",
-    "sender": "12",
-    "tel": "1223",
-    "type": "123",
-    "des": "1231",
-    "position": "324",
-    "timeSubscribe": "2022-05-19 16:00-17:00",
-    "progress": 0,
-    "solver": null,
-    "timeStart": "2022-05-18 22:37:19",
-    "timeDistribution": null,
-    "timeEnd": null,
-    "feedback": null,
+    "id": 19,
+    "username": "user",
+    "sender": "_user",
+    "tel": "17797700864",
+    "type": "wire",
+    "des": "无线网络没有弹窗故障描述故障描述故障描述故障描述",
+    "position": "行政楼201-A",
+    "timeSubscribe": "2022-05-25 10:00-11:00",
+    "progress": 2,
+    "solver": "_repairman 17797700864",
+    "timeStart": "2022-05-22 17:31:06",
+    "timeDistribution": "2022-05-22 17:32:00",
+    "timeEnd": "2022-05-22 17:32:53",
+    "feedback": "维修员留言维修员留言维修员留言维修员留言",
     "stars": null,
-    "remark": null,
-    "imgPath": "[https://imgs-repairnetwork-1257191112.cos.ap-nanjing.myqcloud.com/12/1652884637361.jpeg, https://imgs-repairnetwork-1257191112.cos.ap-nanjing.myqcloud.com/12/1652884638253.jpeg]"
+    "remark": "管理员留言管理员留言管理员留言管理员留言",
+    "imgPath": "[]"
 });
-const imgPathList = ref(orderTable.imgPath.split("]")[0].split("[")[1].split(","))
+const imgPathList = ref(orderTable.imgPath == null ? [] : orderTable.imgPath.split("]")[0].split("[")[1].split(","))
 
 let imgNumber = ref(0);
 
-console.log(imgPathList)
 </script>
 
 <style lang="less" scoped>

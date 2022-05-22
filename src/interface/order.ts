@@ -15,5 +15,5 @@ export interface order {
     timeSubscribe: string;
     type: string;
     username: string;
-    imgPath: string;
+    imgPath: string | null;
 }
