@@ -160,14 +160,15 @@ const getTableData = async (orderId: number | undefined) => {
     // console.log("res:", res.data[0]);
     orderTable.value = res.data[0];
     // 解析图片地址参数
-    imgPathList.value = orderTable.value.imgPath == null ? [] : orderTable.value.imgPath.split("]")[0].split("[")[1].split(",");
+    // imgPathList.value = orderTable.value.imgPath == null ? [] : orderTable.value.imgPath.replace("\"", "").split("]")[0].split("[")[1].split(", ");
+    imgPathList.value = orderTable.value.imgPath == null ? [] : JSON.parse(orderTable.value.imgPath);
     if (res.data[0].progress === 0) {
         orderDisabled.value.adminInformation = false;
     } else if (res.data[0].progress === 1) {
         orderDisabled.value.repairmanInformation = false;
     }
     // console.log("orderTable", orderTable.value);
-    // console.log("imgPathList", imgPathList.value);
+    console.log("imgPathList", imgPathList.value);
     // console.log("orderDisabled", orderDisabled.value);
 };
 
