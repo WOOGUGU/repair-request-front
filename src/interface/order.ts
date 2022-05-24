@@ -9,8 +9,8 @@ export interface order {
     solver?: string | null;
     stars?: string | null;
     tel?: string;
-    timeDistribution?: string | null;
-    timeEnd?: string | null;
+    timeDistribution?: string | undefined;
+    timeEnd?: string | undefined;
     timeStart?: string;
     timeSubscribe?: string;
     type?: string;

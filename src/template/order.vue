@@ -99,13 +99,21 @@
                     <el-input class=input v-model="orderTable.solver" placeholder="Please input"
                         :disabled="orderDisabled.adminInformation" />
                 </el-form-item>
-                <el-form-item label="审批时间">
-                    <el-input class=input v-model="orderTable.timeDistribution" placeholder="Please input"
+                <el-form-item label="选择维修员">
+                    <el-input class=input v-model="orderTable.solver" placeholder="Please input"
                         :disabled="orderDisabled.adminInformation" />
                 </el-form-item>
                 <el-form-item label="管理员留言">
                     <el-input class=textInput v-model="orderTable.remark" autosize type="textarea"
                         :disabled="orderDisabled.adminInformation" />
+                </el-form-item>
+                <el-form-item label="审批时间">
+                    <el-date-picker v-model="orderTable.timeDistribution" type="datetime"
+                        placeholder="Select date and time" format="YYYY/MM/DD hh:mm:ss" value-format="YYYY-MM-DD h:m:ss"
+                        :disabled="orderDisabled.adminInformation" />
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="userInformationClick">Query</el-button>
                 </el-form-item>
             </el-card>
 
@@ -188,11 +196,18 @@ const getTableData = async (orderId: number | undefined) => {
 };
 
 getTableData(Number(route.query.orderId));
+
+
+
+const userInformationClick = () => {
+    console.log('submit!')
+}
 </script>
 
 <style lang="less" scoped>
 .input,
-.select {
+.select,
+.datePicker {
     width: 100%;
 }
 </style>
