@@ -10,9 +10,9 @@ export interface orderParam {
   username?: string;
 }
 
-export const selectOrderList = async (rs: orderParam) => {
+export const selectOrderList = (rs: orderParam) => {
   console.log("rs:", rs);
-  let res = await request({
+  let res = request({
     headers: {
       "Content-Type": "application/json;",
     },

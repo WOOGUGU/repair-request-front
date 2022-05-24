@@ -1,5 +1,4 @@
 import request from "./request";
-import qs from "qs";
 import md5 from "js-md5";
 
 type loginTable = {
@@ -8,9 +7,9 @@ type loginTable = {
 };
 
 // 登入接口
-export const login = async (rs: loginTable) => {
+export const login = (rs: loginTable) => {
   // console.log(rs);
-  let res = await request({
+  let res = request({
     url: "/doLogin",
     method: "post",
     data: {
@@ -35,8 +34,8 @@ export const checkPermissions = (
 };
 
 // 通过session获取用户信息
-export const getUserInfo = async () => {
-  let res = await request({
+export const getUserInfo = () => {
+  let res = request({
     url: "/v2/inner/getUserInfo",
     method: "get",
   });
