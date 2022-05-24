@@ -139,8 +139,15 @@ import { selectOrderList, orderParam } from "@/api/order";
 import { useRoute } from 'vue-router'
 const route = useRoute()
 
+interface imgFile {
+    url: string,
+    type: string,
+}
+
+// 文件信息列表
+let fileList: Ref<imgFile[]> = ref([])
 // 图片地址列表
-let imgPathList = ref()
+let imgPathList: Ref<string[]> = ref([])
 // 光标选中图片号
 let imgNumber = ref(0);
 // 工单信息
@@ -160,15 +167,23 @@ const getTableData = async (orderId: number | undefined) => {
     // console.log("res:", res.data[0]);
     orderTable.value = res.data[0];
     // 解析图片地址参数
-    // imgPathList.value = orderTable.value.imgPath == null ? [] : orderTable.value.imgPath.replace("\"", "").split("]")[0].split("[")[1].split(", ");
-    imgPathList.value = orderTable.value.imgPath == null ? [] : JSON.parse(orderTable.value.imgPath);
+    fileList.value = orderTable.value.imgPath == null ? [] : JSON.parse(orderTable.value.imgPath);
+    let j = 0;
+    for (let i = 0; i < fileList.value.length; i++) {
+        if (fileList.value[i].type === "image") {
+            imgPathList.value[j] = fileList.value[i].url;
+            j++;
+        }
+    }
+
     if (res.data[0].progress === 0) {
         orderDisabled.value.adminInformation = false;
     } else if (res.data[0].progress === 1) {
         orderDisabled.value.repairmanInformation = false;
     }
     // console.log("orderTable", orderTable.value);
-    console.log("imgPathList", imgPathList.value);
+    // console.log("fileList", fileList.value);
+    // console.log("imgPathList", imgPathList.value);
     // console.log("orderDisabled", orderDisabled.value);
 };
 
