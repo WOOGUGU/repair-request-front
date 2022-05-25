@@ -103,7 +103,8 @@
                 <el-form-item label="选择维修员">
                     <el-select class=select v-model="orderTable.solver" placeholder="please select your zone"
                         :disabled="orderDisabled.adminInformation">
-                        <el-option v-for="repairman, item in repairmanList" :label="repairman.username" :value="item" />
+                        <el-option v-for="repairman, item in repairmanList" :label="repairman.username"
+                            :value="repairman.username" />
                     </el-select>
                 </el-form-item>
                 <el-form-item label="管理员留言">
@@ -115,8 +116,9 @@
                         placeholder="Select date and time" format="YYYY/MM/DD hh:mm:ss" value-format="YYYY-MM-DD h:m:ss"
                         :disabled="orderDisabled.adminInformation" />
                 </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" @click="orderInformationClick">分配工单</el-button>
+                <el-form-item v-if="!orderDisabled.adminInformation">
+                    <el-button type="primary" @click="adminInformationClick">分配工单</el-button>
+                    <el-button type="danger" @click="orderNoPass">驳回工单</el-button>
                 </el-form-item>
             </el-card>
 
@@ -146,8 +148,9 @@
 <script setup lang="ts">
 import { ref, Ref } from 'vue';
 import { order } from '@/interface/order';
-import { selectOrderList, orderParam } from "@/api/order";
+import { selectOrderList, orderParam, adminDealOrder, sendRepairman } from "@/api/order";
 import { selectRepairmanList } from '@/api/Repairman';
+import { ElMessage, FormInstance, FormRules } from "element-plus";
 import { useRoute } from 'vue-router'
 const route = useRoute()
 
@@ -208,7 +211,7 @@ interface repairman {
     password?: null,
     roles?: string[],
     tel?: string,
-    username?: string,
+    username: string,
 }
 
 let repairmanList: Ref<repairman[]> = ref([]);
@@ -223,8 +226,23 @@ const getRepairmanList = async () => {
 getRepairmanList();
 
 // --------审批信息提交--------
-const orderInformationClick = () => {
-    console.log('submit!')
+const adminInformationClick = async () => {
+    let rs: adminDealOrder = {
+        orderId: orderTable.value.id,
+        solver: orderTable.value.solver,
+    };
+    const res = await sendRepairman(rs);
+    // console.log("res", res);
+    if (res.code === "00000") {
+        ElMessage({ showClose: true, message: "分配成功~", type: "success", duration: 1000 });
+    } else {
+        ElMessage({ showClose: true, message: "分配失败：" + res.userMsg, type: "error", duration: 1000 });
+    }
+}
+
+// --------驳回工单--------
+const orderNoPass = async () => {
+    console.log("orderNoPass!");
 }
 </script>
 

@@ -1,7 +1,7 @@
 export interface order {
     des?: string;
     feedback?: string | null;
-    id?: number | null;
+    id?: number;
     position?: string;
     progress?: number | null;
     remark?: string | null;
