@@ -20,7 +20,8 @@ export default defineConfig({
     proxy: {
       "/api-dev": {
         // target: "https://repair.woogugu.cn/",
-        target: "https://wrz.lty923.com/",
+        // target: "https://wrz.lty923.com/",
+        target: "https://baoxiu.lty923.com/",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api-dev/, ""),
       },

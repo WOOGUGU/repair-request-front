@@ -6,7 +6,7 @@ export interface order {
     progress?: number | null;
     remark?: string | null;
     sender?: string;
-    solver?: string | null;
+    solver?: string | undefined;
     stars?: string | null;
     tel?: string;
     timeDistribution?: string | undefined;

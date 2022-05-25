@@ -96,24 +96,27 @@
                     </div>
                 </template>
                 <el-form-item label="管理员工号">
-                    <el-input class=input v-model="orderTable.solver" placeholder="Please input"
-                        :disabled="orderDisabled.adminInformation" />
+                    <!-- <el-input class=input v-model="orderTable.solver" placeholder="Please input"
+                        :disabled="orderDisabled.adminInformation" /> -->
+                    <el-input class="input" placeholder="暂不记录管理员信息" :disabled="orderDisabled.orderInformation" />
                 </el-form-item>
                 <el-form-item label="选择维修员">
-                    <el-input class=input v-model="orderTable.solver" placeholder="Please input"
-                        :disabled="orderDisabled.adminInformation" />
+                    <el-select class=select v-model="orderTable.solver" placeholder="please select your zone"
+                        :disabled="orderDisabled.adminInformation">
+                        <el-option v-for="repairman, item in repairmanList" :label="repairman.username" :value="item" />
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="管理员留言">
                     <el-input class=textInput v-model="orderTable.remark" autosize type="textarea"
                         :disabled="orderDisabled.adminInformation" />
                 </el-form-item>
-                <el-form-item label="审批时间">
+                <el-form-item v-if="orderDisabled.adminInformation" label="审批时间">
                     <el-date-picker v-model="orderTable.timeDistribution" type="datetime"
                         placeholder="Select date and time" format="YYYY/MM/DD hh:mm:ss" value-format="YYYY-MM-DD h:m:ss"
                         :disabled="orderDisabled.adminInformation" />
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="userInformationClick">Query</el-button>
+                    <el-button type="primary" @click="orderInformationClick">分配工单</el-button>
                 </el-form-item>
             </el-card>
 
@@ -144,13 +147,12 @@
 import { ref, Ref } from 'vue';
 import { order } from '@/interface/order';
 import { selectOrderList, orderParam } from "@/api/order";
+import { selectRepairmanList } from '@/api/Repairman';
 import { useRoute } from 'vue-router'
 const route = useRoute()
 
-interface imgFile {
-    url: string,
-    type: string,
-}
+// --------工单基本信息--------
+interface imgFile { url: string, type: string, }
 
 // 文件信息列表
 let fileList: Ref<imgFile[]> = ref([])
@@ -198,8 +200,30 @@ const getTableData = async (orderId: number | undefined) => {
 getTableData(Number(route.query.orderId));
 
 
+// --------工单可选项信息--------
+// 维修员列表
+interface repairman {
+    id?: number,
+    name?: string,
+    password?: null,
+    roles?: string[],
+    tel?: string,
+    username?: string,
+}
 
-const userInformationClick = () => {
+let repairmanList: Ref<repairman[]> = ref([]);
+const getRepairmanList = async () => {
+    if (orderTable.value.progress === 0)
+        return;
+    let res = await selectRepairmanList();
+    repairmanList.value = res.data;
+    // console.log("repairmanList", repairmanList.value);
+}
+
+getRepairmanList();
+
+// --------审批信息提交--------
+const orderInformationClick = () => {
     console.log('submit!')
 }
 </script>
