@@ -30,6 +30,7 @@ service.interceptors.response.use(
   },
   (error) => {
     // console.log("error", error.response);
+    // 拦截401错误，跳转到登录页面
     if (error.response.status === 401) {
       router.push("/login");
       ElMessage({
@@ -40,8 +41,16 @@ service.interceptors.response.use(
       });
       return Promise.reject(new Error("登录过期"));
     }
-    // TODO: 拦截400错误
-    return Promise.reject(new Error(error));
+    // 拦截400错误
+    if (error.response.status === 400) {
+      ElMessage({
+        showClose: true,
+        message: "参数错误，请检查是否填写完整",
+        type: "error",
+        duration: 1000,
+      })
+    }
+    return Promise.reject(new Error("参数错误"));
   }
 );
 
