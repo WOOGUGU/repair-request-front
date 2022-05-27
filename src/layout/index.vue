@@ -45,6 +45,12 @@
               </el-icon>
               <span>已完成</span>
             </el-menu-item>
+            <el-menu-item index="2-4" class="children" @click="savePath('rejectOrder')">
+              <el-icon>
+                <circle-close />
+              </el-icon>
+              <span>已驳回</span>
+            </el-menu-item>
           </el-sub-menu>
           <!-- 人员管理 -->
           <el-sub-menu index="3">
@@ -118,6 +124,7 @@ import {
   CirclePlus,
   Clock,
   CircleCheck,
+  CircleClose,
   User,
   Setting,
   Postcard,

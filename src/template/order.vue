@@ -122,7 +122,7 @@
                 </el-form-item>
                 <el-form-item v-if="!orderDisabled.adminInformation">
                     <el-button type="primary" @click="adminInformationClick" plain>分配</el-button>
-                    <el-button type="danger" @click="orderNoPass" plain>驳回</el-button>
+                    <el-button type="danger" @click="orderReject" plain>驳回</el-button>
                 </el-form-item>
             </el-card>
 
@@ -252,7 +252,7 @@ const adminInformationClick = async () => {
 }
 
 // --------驳回工单--------
-const orderNoPass = async () => {
+const orderReject = async () => {
     // FIXME: 表单校验
     let rs: adminDealOrder = {
         orderId: orderTable.value.id,
