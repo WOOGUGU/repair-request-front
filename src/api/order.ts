@@ -26,8 +26,8 @@ export const selectOrderList = (rs: orderParam) => {
 
 export interface adminDealOrder {
   orderId?: number;
-  // -2：审核不通过，-1：用户取消，0：待审核，1：待处理，2：已处理
-  progress?: [-2, -1, 0, 1, 2];
+  // 0待审核,1待处理,2已处理,3用户取消,4审核不通过
+  progress?: 0 | 1 | 2 | 3 | 4;
   // 备注（留言）
   remark?: string;
   // 处理者（维修员）
@@ -41,6 +41,21 @@ export const sendRepairman = (rs: adminDealOrder) => {
       "Content-Type": "application/json;",
     },
     url: "/v2/order/sendRepairman",
+    method: "post",
+    params: rs,
+  });
+  return res;
+}
+
+// 驳回工单
+export const checkOrder = (rs: adminDealOrder) => {
+  rs.progress = 4;
+  console.log("checkOrder-rs", rs);
+  let res = request({
+    headers: {
+      "Content-Type": "application/json;",
+    },
+    url: "/v2/order/checkOrder",
     method: "post",
     params: rs,
   });

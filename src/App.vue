@@ -4,8 +4,17 @@
 </template>
 
 <script setup lang="ts">
-import { useTransitionState } from "vue";
+import { useTransitionState, ref, nextTick, provide } from "vue";
 import login from "./views/login/index.vue";
+
+const isRouterAlive = ref(true);
+const reload = () => {
+  isRouterAlive.value = false;
+  nextTick(() => {
+    isRouterAlive.value = true;
+  });
+};
+provide("reload", reload);
 </script>
 
 

@@ -111,18 +111,22 @@
                     <el-input class=textInput v-model="orderTable.remark" autosize type="textarea"
                         :disabled="orderDisabled.adminInformation" />
                 </el-form-item>
-                <el-form-item v-if="orderDisabled.adminInformation" label="审批时间">
-                    <el-date-picker v-model="orderTable.timeDistribution" type="datetime"
-                        placeholder="Select date and time" format="YYYY/MM/DD hh:mm:ss" value-format="YYYY-MM-DD h:m:ss"
+                <!-- XXX: 暂不记录驳回时间，直接判断是否有时间信息 -->
+                <!-- <el-form-item v-if="orderDisabled.adminInformation" label="审批时间">
+                    <el-input class=textInput v-model="orderTable.timeDistribution" placeholder="Please input"
+                        :disabled="orderDisabled.adminInformation" />
+                </el-form-item> -->
+                <el-form-item v-if="orderTable.timeDistribution != undefined" label="审批时间">
+                    <el-input class=textInput v-model="orderTable.timeDistribution" placeholder="Please input"
                         :disabled="orderDisabled.adminInformation" />
                 </el-form-item>
                 <el-form-item v-if="!orderDisabled.adminInformation">
-                    <el-button type="primary" @click="adminInformationClick">分配工单</el-button>
-                    <el-button type="danger" @click="orderNoPass">驳回工单</el-button>
+                    <el-button type="primary" @click="adminInformationClick">分配</el-button>
+                    <el-button type="danger" @click="orderNoPass">驳回</el-button>
                 </el-form-item>
             </el-card>
 
-            <el-card>
+            <el-card v-if="!orderDisabled.repairmanInformation">
                 <template #header>
                     <div class="card-header">
                         <span>维修信息</span>
@@ -148,11 +152,11 @@
 <script setup lang="ts">
 import { ref, Ref } from 'vue';
 import { order } from '@/interface/order';
-import { selectOrderList, orderParam, adminDealOrder, sendRepairman } from "@/api/order";
+import { selectOrderList, orderParam, adminDealOrder, sendRepairman, checkOrder } from "@/api/order";
 import { selectRepairmanList } from '@/api/Repairman';
 import { ElMessage, FormInstance, FormRules } from "element-plus";
-import { useRoute } from 'vue-router'
-const route = useRoute()
+import { useRoute } from 'vue-router';
+const route = useRoute();
 
 // --------工单基本信息--------
 interface imgFile { url: string, type: string, }
@@ -225,8 +229,11 @@ const getRepairmanList = async () => {
 
 getRepairmanList();
 
+console.log("time", orderTable.value.timeDistribution);
+
 // --------审批信息提交--------
 const adminInformationClick = async () => {
+    // FIXME: 表单校验
     let rs: adminDealOrder = {
         orderId: orderTable.value.id,
         solver: orderTable.value.solver,
@@ -235,6 +242,10 @@ const adminInformationClick = async () => {
     // console.log("res", res);
     if (res.code === "00000") {
         ElMessage({ showClose: true, message: "分配成功~", type: "success", duration: 1000 });
+        // BUG: 刷新页面改为刷新组件
+        // setTimeout(() => {
+        //     location.reload();
+        // }, 800);
     } else {
         ElMessage({ showClose: true, message: "分配失败：" + res.userMsg, type: "error", duration: 1000 });
     }
@@ -242,7 +253,22 @@ const adminInformationClick = async () => {
 
 // --------驳回工单--------
 const orderNoPass = async () => {
-    console.log("orderNoPass!");
+    // FIXME: 表单校验
+    let rs: adminDealOrder = {
+        orderId: orderTable.value.id,
+        remark: orderTable.value.remark,
+    };
+    const res = await checkOrder(rs);
+    // console.log("res", res);
+    if (res.code === "00000") {
+        ElMessage({ showClose: true, message: "驳回成功~", type: "success", duration: 1000 });
+        // BUG: 刷新页面改为刷新组件
+        // setTimeout(() => {
+        //     location.reload();
+        // }, 800);
+    } else {
+        ElMessage({ showClose: true, message: "驳回失败：" + res.userMsg, type: "error", duration: 1000 });
+    }
 }
 </script>
 

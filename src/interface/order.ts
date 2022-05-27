@@ -4,13 +4,13 @@ export interface order {
     id?: number;
     position?: string;
     progress?: number | null;
-    remark?: string | null;
+    remark?: string;
     sender?: string;
-    solver?: string | undefined;
+    solver?: string;
     stars?: string | null;
     tel?: string;
-    timeDistribution?: string | undefined;
-    timeEnd?: string | undefined;
+    timeDistribution?: string;
+    timeEnd?: string;
     timeStart?: string;
     timeSubscribe?: string;
     type?: string;
