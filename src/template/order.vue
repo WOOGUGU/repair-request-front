@@ -121,8 +121,8 @@
                         :disabled="orderDisabled.adminInformation" />
                 </el-form-item>
                 <el-form-item v-if="!orderDisabled.adminInformation">
-                    <el-button type="primary" @click="adminInformationClick">分配</el-button>
-                    <el-button type="danger" @click="orderNoPass">驳回</el-button>
+                    <el-button type="primary" @click="adminInformationClick" plain>分配</el-button>
+                    <el-button type="danger" @click="orderNoPass" plain>驳回</el-button>
                 </el-form-item>
             </el-card>
 
@@ -242,10 +242,10 @@ const adminInformationClick = async () => {
     // console.log("res", res);
     if (res.code === "00000") {
         ElMessage({ showClose: true, message: "分配成功~", type: "success", duration: 1000 });
-        // BUG: 刷新页面改为刷新组件
-        // setTimeout(() => {
-        //     location.reload();
-        // }, 800);
+        // FIXME: 刷新页面改为刷新组件
+        setTimeout(() => {
+            location.reload();
+        }, 1100);
     } else {
         ElMessage({ showClose: true, message: "分配失败：" + res.userMsg, type: "error", duration: 1000 });
     }
@@ -262,10 +262,10 @@ const orderNoPass = async () => {
     // console.log("res", res);
     if (res.code === "00000") {
         ElMessage({ showClose: true, message: "驳回成功~", type: "success", duration: 1000 });
-        // BUG: 刷新页面改为刷新组件
-        // setTimeout(() => {
-        //     location.reload();
-        // }, 800);
+        // FIXME: 刷新页面改为刷新组件
+        setTimeout(() => {
+            location.reload();
+        }, 1100);
     } else {
         ElMessage({ showClose: true, message: "驳回失败：" + res.userMsg, type: "error", duration: 1000 });
     }
