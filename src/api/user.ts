@@ -3,11 +3,11 @@ import request from "./request";
 // 人员通用格式
 export interface userParam {
     id: number,
-    name: string,
-    password: null,
-    roles: string[],
-    tel: string,
     username: string,
+    name: string,
+    tel: string,
+    password?: null,
+    roles?: string[],
 }
 
 // 查找管理员列表
