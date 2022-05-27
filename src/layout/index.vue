@@ -58,13 +58,25 @@
               <el-icon>
                 <user />
               </el-icon>
-              <span>人员管理</span>
+              <span>用户管理</span>
             </template>
-            <el-menu-item index="3-1" class="children">
+            <el-menu-item index="3-1" class="children" @click="savePath('adminList')">
               <el-icon>
                 <postcard />
               </el-icon>
-              <span>维修员管理</span>
+              <span>管理员列表</span>
+            </el-menu-item>
+            <el-menu-item index="3-2" class="children" @click="savePath('repairmanList')">
+              <el-icon>
+                <postcard />
+              </el-icon>
+              <span>维修员列表</span>
+            </el-menu-item>
+            <el-menu-item index="3-3" class="children" @click="savePath('studentList')">
+              <el-icon>
+                <postcard />
+              </el-icon>
+              <span>学生列表</span>
             </el-menu-item>
           </el-sub-menu>
           <!-- 面板设置 -->
@@ -118,19 +130,8 @@
 import { ref } from "vue";
 import { mainStore } from "@/store";
 import {
-  HelpFilled,
-  House,
-  Document,
-  CirclePlus,
-  Clock,
-  CircleCheck,
-  CircleClose,
-  User,
-  Setting,
-  Postcard,
-  Fold,
-  Expand,
-  ArrowDown,
+  HelpFilled, House, Document, CirclePlus, Clock, CircleCheck, CircleClose,
+  User, Setting, Postcard, Fold, Expand, ArrowDown,
 } from "@element-plus/icons-vue";
 import router from "@/router";
 

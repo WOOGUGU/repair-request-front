@@ -41,7 +41,22 @@ const routes = [
         path: "/order",
         name: "order",
         component: () => import("../views/order/index.vue"),
-      }
+      },
+      {
+        path: "/adminList",
+        name: "adminList",
+        component: () => import("../views/userList/adminList/index.vue"),
+      },
+      {
+        path: "/repairmanList",
+        name: "repairmanList",
+        component: () => import("../views/userList/repairmanList/index.vue"),
+      },
+      {
+        path: "/studentList",
+        name: "studentList",
+        component: () => import("../views/userList/studentList/index.vue"),
+      },
     ],
   },
   {
