@@ -72,11 +72,11 @@
               </el-icon>
               <span>维修员列表</span>
             </el-menu-item>
-            <el-menu-item index="3-3" class="children" @click="savePath('studentList')">
+            <el-menu-item index="3-3" class="children" @click="savePath('norUserList')">
               <el-icon>
                 <postcard />
               </el-icon>
-              <span>学生列表</span>
+              <span>普通用户列表</span>
             </el-menu-item>
           </el-sub-menu>
           <!-- 面板设置 -->

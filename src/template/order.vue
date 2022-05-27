@@ -153,7 +153,7 @@
 import { ref, Ref } from 'vue';
 import { order } from '@/interface/order';
 import { selectOrderList, orderParam, adminDealOrder, sendRepairman, checkOrder } from "@/api/order";
-import { selectRepairmanList } from '@/api/Repairman';
+import { selectRepairmanList, userParam } from '@/api/user';
 import { ElMessage, FormInstance, FormRules } from "element-plus";
 import { useRoute } from 'vue-router';
 const route = useRoute();
@@ -208,17 +208,7 @@ getTableData(Number(route.query.orderId));
 
 
 // --------工单可选项信息--------
-// 维修员列表
-interface repairman {
-    id?: number,
-    name?: string,
-    password?: null,
-    roles?: string[],
-    tel?: string,
-    username: string,
-}
-
-let repairmanList: Ref<repairman[]> = ref([]);
+let repairmanList: Ref<userParam[]> = ref([]);
 const getRepairmanList = async () => {
     if (orderTable.value.progress === 0)
         return;
@@ -242,7 +232,7 @@ const adminInformationClick = async () => {
     // console.log("res", res);
     if (res.code === "00000") {
         ElMessage({ showClose: true, message: "分配成功~", type: "success", duration: 1000 });
-        // FIXME: 刷新页面改为刷新组件
+        // FIXME: 刷新页面改为页面回退/刷新组件
         setTimeout(() => {
             location.reload();
         }, 1100);
@@ -262,7 +252,7 @@ const orderReject = async () => {
     // console.log("res", res);
     if (res.code === "00000") {
         ElMessage({ showClose: true, message: "驳回成功~", type: "success", duration: 1000 });
-        // FIXME: 刷新页面改为刷新组件
+        // FIXME: 刷新页面改为页面回退/刷新组件
         setTimeout(() => {
             location.reload();
         }, 1100);

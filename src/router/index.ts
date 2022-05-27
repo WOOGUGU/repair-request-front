@@ -53,9 +53,9 @@ const routes = [
         component: () => import("../views/userList/repairmanList/index.vue"),
       },
       {
-        path: "/studentList",
-        name: "studentList",
-        component: () => import("../views/userList/studentList/index.vue"),
+        path: "/norUserList",
+        name: "norUserList",
+        component: () => import("../views/userList/norUserList/index.vue"),
       },
     ],
   },
