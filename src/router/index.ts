@@ -57,6 +57,11 @@ const routes = [
         name: "norUserList",
         component: () => import("../views/userList/norUserList/index.vue"),
       },
+      {
+        path: "/carouselList",
+        name: "carouselList",
+        component: () => import("../views/carouselList/index.vue"),
+      },
     ],
   },
   {

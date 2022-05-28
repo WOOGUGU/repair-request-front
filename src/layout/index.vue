@@ -79,8 +79,23 @@
               <span>普通用户列表</span>
             </el-menu-item>
           </el-sub-menu>
+          <!-- 轮播图管理 -->
+          <el-sub-menu index="4">
+            <template #title>
+              <el-icon>
+                <Picture />
+              </el-icon>
+              <span>轮播图管理</span>
+            </template>
+            <el-menu-item index="4-1" class="children" @click="savePath('carouselList')">
+              <el-icon>
+                <Files />
+              </el-icon>
+              <span>轮播图列表</span>
+            </el-menu-item>
+          </el-sub-menu>
           <!-- 面板设置 -->
-          <el-menu-item index="4" disabled>
+          <el-menu-item index="999" disabled>
             <el-icon>
               <setting />
             </el-icon>
@@ -131,7 +146,7 @@ import { ref } from "vue";
 import { mainStore } from "@/store";
 import {
   HelpFilled, House, Document, CirclePlus, Clock, CircleCheck, CircleClose,
-  User, Setting, Postcard, Fold, Expand, ArrowDown,
+  User, Setting, Postcard, Fold, Expand, ArrowDown, Picture, Files
 } from "@element-plus/icons-vue";
 import router from "@/router";
 
