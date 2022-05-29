@@ -91,8 +91,10 @@ const handleAddSubmit = async () => {
             // console.log("res:", res);
             if (res.code === "00000") {
                 ElMessage({ showClose: true, message: "添加用户成功~", type: "success", duration: 1000 });
+                // TODO：跳转到用户详情页
                 setTimeout(() => {
-                    userRouter.push({ path: "/user", query: { userId: res.data.id } });
+                    // userRouter.push({ path: "/user", query: { userId: res.data } });
+                    location.reload();
                 }, 1100);
             } else {
                 ElMessage({ showClose: true, message: "添加失败：" + res.userMsg, type: "error", duration: 1000 });
