@@ -78,6 +78,12 @@
               </el-icon>
               <span>普通用户列表</span>
             </el-menu-item>
+            <el-menu-item index="3-4" class="children" @click="savePath('user')">
+              <el-icon>
+                <plus />
+              </el-icon>
+              <span>添加管理员</span>
+            </el-menu-item>
           </el-sub-menu>
           <!-- 轮播图管理 -->
           <el-sub-menu index="4">
@@ -176,7 +182,7 @@ import { ref } from "vue";
 import { mainStore } from "@/store";
 import {
   HelpFilled, House, Document, CirclePlus, Clock, CircleCheck, CircleClose,
-  User, Setting, Postcard, Fold, Expand, ArrowDown, Picture, Files, Bell, Collection
+  User, Setting, Postcard, Fold, Expand, ArrowDown, Picture, Files, Bell, Collection, Plus
 } from "@element-plus/icons-vue";
 import router from "@/router";
 
