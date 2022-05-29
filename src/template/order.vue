@@ -155,7 +155,7 @@ import { ref, Ref } from 'vue';
 import { order } from '@/interface/order';
 import { selectOrderList, orderParam, adminDealOrder, sendRepairman, checkOrder } from "@/api/order";
 import { selectRepairmanList, userParam } from '@/api/user';
-import { ElMessage, FormInstance, FormRules } from "element-plus";
+import { ElMessage } from "element-plus";
 import { useRoute } from 'vue-router';
 const route = useRoute();
 

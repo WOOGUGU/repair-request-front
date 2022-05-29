@@ -22,9 +22,11 @@
 <script setup lang="ts">
 import { Ref, ref } from "vue";
 import { userParam, selectAdminList, selectRepairmanList, selectNorUserList } from "@/api/user";
+import { useRouter } from 'vue-router'
 
+const userRouter = useRouter()
 const props = defineProps({
-    // 用户等级： 1.管理员 2.维修员 3.普通用户
+    // 用户等级： 1.维修员 2.管理员 3.普通用户
     role: Number,
 });
 let tableData: Ref<userParam[]> = ref([]);
@@ -32,13 +34,13 @@ let tableData: Ref<userParam[]> = ref([]);
 // --------查询用户列表----------
 const getTableData = async (role: number | undefined) => {
     if (role === 1) {
-        // 管理员
-        let res = await selectAdminList();
+        // 维修员
+        let res = await selectRepairmanList();
         // console.log("res-1:", res);
         tableData.value = res.data;
     } else if (role === 2) {
-        // 维修员
-        let res = await selectRepairmanList();
+        // 管理员
+        let res = await selectAdminList();
         // console.log("res-2:", res);
         tableData.value = res.data;
     } else if (role === 3) {
@@ -52,10 +54,10 @@ const getTableData = async (role: number | undefined) => {
 getTableData(props.role);
 
 // --------跳转修改--------
-// TODO: 跳转修改页面
 const handleRevise = (index: number, row: userParam) => {
     console.log("index", index);
     console.log("row", row);
+    userRouter.push({ path: "/user", query: { userId: row.id } });
 };
 
 // --------删除--------

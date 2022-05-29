@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import userList from '@/template/userList.vue';
 
-const role: number = 1
+const role: number = 2
 </script>
 
 <style lang="less" scoped>

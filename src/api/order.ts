@@ -12,7 +12,7 @@ export interface orderParam {
 
 // 万用查找
 export const selectOrderList = (rs: orderParam) => {
-  console.log("selectOrderList-rs", rs);
+  // console.log("selectOrderList-rs", rs);
   let res = request({
     headers: {
       "Content-Type": "application/json;",
@@ -35,7 +35,7 @@ export interface adminDealOrder {
 }
 // 分配维修员
 export const sendRepairman = (rs: adminDealOrder) => {
-  console.log("sendRepairman-rs", rs);
+  // console.log("sendRepairman-rs", rs);
   let res = request({
     headers: {
       "Content-Type": "application/json;",
@@ -50,7 +50,7 @@ export const sendRepairman = (rs: adminDealOrder) => {
 // 驳回工单
 export const checkOrder = (rs: adminDealOrder) => {
   rs.progress = 4;
-  console.log("checkOrder-rs", rs);
+  // console.log("checkOrder-rs", rs);
   let res = request({
     headers: {
       "Content-Type": "application/json;",
