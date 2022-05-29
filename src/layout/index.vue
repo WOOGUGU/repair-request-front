@@ -109,6 +109,21 @@
               <span>公告列表</span>
             </el-menu-item>
           </el-sub-menu>
+          <!-- 文章管理 -->
+          <el-sub-menu index="6">
+            <template #title>
+              <el-icon>
+                <collection />
+              </el-icon>
+              <span>文章管理</span>
+            </template>
+            <el-menu-item index="6-1" class="children" @click="savePath('articleList')">
+              <el-icon>
+                <collection />
+              </el-icon>
+              <span>文章列表</span>
+            </el-menu-item>
+          </el-sub-menu>
           <!-- 面板设置 -->
           <el-menu-item index="999" disabled>
             <el-icon>
@@ -161,7 +176,7 @@ import { ref } from "vue";
 import { mainStore } from "@/store";
 import {
   HelpFilled, House, Document, CirclePlus, Clock, CircleCheck, CircleClose,
-  User, Setting, Postcard, Fold, Expand, ArrowDown, Picture, Files, Bell,
+  User, Setting, Postcard, Fold, Expand, ArrowDown, Picture, Files, Bell, Collection
 } from "@element-plus/icons-vue";
 import router from "@/router";
 

@@ -67,6 +67,11 @@ const routes = [
         name: "noticeList",
         component: () => import("../views/noticeList/index.vue"),
       },
+      {
+        path: "/articleList",
+        name: "articleList",
+        component: () => import("../views/articleList/index.vue"),
+      }
     ],
   },
   {
