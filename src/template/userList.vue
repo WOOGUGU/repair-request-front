@@ -23,8 +23,8 @@ import { Ref, ref, computed } from "vue";
 import { Search } from '@element-plus/icons-vue'
 import { userParam, selectAdminList, selectRepairmanList, selectNorUserList } from "@/api/user";
 import { useRouter } from 'vue-router'
-
 const userRouter = useRouter()
+
 const props = defineProps({
     // 用户等级： 1.维修员 2.管理员 3.普通用户
     role: Number,

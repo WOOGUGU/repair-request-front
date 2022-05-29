@@ -1,4 +1,5 @@
 import request from "./request";
+import md5 from "js-md5";
 
 // 人员通用格式
 export interface userParam {
@@ -6,7 +7,7 @@ export interface userParam {
     username: string,
     name: string,
     tel: string,
-    password?: null,
+    password?: string,
     roles?: any[],
     // 修改时等级格式
     roleTypes?: string[],
@@ -65,12 +66,28 @@ export const selectUserById = (id: number) => {
 
 // 修改用户
 export const updateUser = (rs: userParam) => {
-    console.log("rs", rs);
+    // console.log("rs", rs);
     let res = request({
         headers: {
             "Content-Type": "application/json;",
         },
         url: "/v2/user/updateUser",
+        method: "post",
+        data: rs,
+    });
+    return res;
+}
+
+// 添加用户
+export const addUser = (rs: any) => {
+    // 对密码加密
+    rs.password = md5(rs.password1 as string);
+    // console.log("rs", rs);
+    let res = request({
+        headers: {
+            "Content-Type": "application/json;",
+        },
+        url: "/v2/user/addUser",
         method: "post",
         data: rs,
     });
