@@ -7,13 +7,10 @@
             <el-table-column prop="username" label="用户名" width="150px" />
             <el-table-column prop="name" label="姓名" width="150px" />
             <el-table-column prop="tel" label="联系方式" width="180px" />
-            <el-table-column label="操作" fixed="right" width="150px">
+            <el-table-column label="操作" fixed="right" width="75px">
                 <template #default="scope">
                     <el-button color="#626aef" @click="handleRevise(scope.$index, scope.row)" size="small" plain>
                         修改
-                    </el-button>
-                    <el-button type="danger" @click="handleDelete(scope.$index, scope.row)" size="small" plain>
-                        删除
                     </el-button>
                 </template>
             </el-table-column>
@@ -72,12 +69,6 @@ const handleRevise = (index: number, row: userParam) => {
     userRouter.push({ path: "/user", query: { userId: row.id } });
 };
 
-// --------删除--------
-// TODO: 删除用户按钮实现
-const handleDelete = (index: number, row: userParam) => {
-    console.log("index", index);
-    console.log("row", row);
-};
 </script>
 
 <style lang="less" scoped>
