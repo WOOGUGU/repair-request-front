@@ -1,5 +1,4 @@
 <template>
-    <p>norUserList</p>
     <userList :role="role" />
 </template>
 

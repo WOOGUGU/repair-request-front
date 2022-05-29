@@ -1,6 +1,8 @@
 <template>
     <el-card>
-        <el-table :data="tableData" style="width: 100%">
+        <el-input v-model="search" placeholder="输入查询的用户名" style="width: 200px" :prefix-icon="Search" clearable />
+        <el-divider />
+        <el-table :data="filterTableData" style="width: 100%">
             <el-table-column prop="id" label="编号" width="85px" />
             <el-table-column prop="username" label="用户名" width="150px" />
             <el-table-column prop="name" label="姓名" width="150px" />
@@ -20,7 +22,8 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, ref } from "vue";
+import { Ref, ref, computed } from "vue";
+import { Search } from '@element-plus/icons-vue'
 import { userParam, selectAdminList, selectRepairmanList, selectNorUserList } from "@/api/user";
 import { useRouter } from 'vue-router'
 
@@ -52,6 +55,15 @@ const getTableData = async (role: number | undefined) => {
 };
 
 getTableData(props.role);
+
+// 筛选用户列表
+const search = ref('')
+const filterTableData = computed(() =>
+    tableData.value.filter(
+        (data) =>
+            !search.value || data.username.toLowerCase().includes(search.value.toLowerCase())
+    )
+)
 
 // --------跳转修改--------
 const handleRevise = (index: number, row: userParam) => {

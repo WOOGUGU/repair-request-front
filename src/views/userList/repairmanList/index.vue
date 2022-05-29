@@ -1,5 +1,4 @@
 <template>
-    <p>repairmanList</p>
     <userList :role="role" />
 </template>
 
