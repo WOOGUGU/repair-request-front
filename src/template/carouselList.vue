@@ -27,8 +27,7 @@
 
 <script setup lang="ts">
 import { Ref, ref } from 'vue';
-import { carousel, selectCarouselList } from '@/api/carousel';
-import { AnyNaptrRecord } from 'dns';
+import { selectCarouselList } from '@/api/carousel';
 
 let tableData: Ref<any[]> = ref([]);
 

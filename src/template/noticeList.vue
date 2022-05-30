@@ -29,8 +29,7 @@
 
 <script setup lang="ts">
 import { ref, Ref } from 'vue';
-import { noticeParam, selectNoticeList } from '@/api/notice';
-import { PickNotAny } from '@/components/__VLS_types';
+import { selectNoticeList } from '@/api/notice';
 
 let tableData: Ref<any[]> = ref([]);
 

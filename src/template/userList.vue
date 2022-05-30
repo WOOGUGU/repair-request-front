@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { Ref, ref, computed } from "vue";
 import { Search } from '@element-plus/icons-vue'
-import { userParam, selectAdminList, selectRepairmanList, selectNorUserList } from "@/api/user";
+import { selectAdminList, selectRepairmanList, selectNorUserList } from "@/api/user";
 import { useRouter } from 'vue-router'
 const userRouter = useRouter()
 
