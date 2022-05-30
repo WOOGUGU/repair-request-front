@@ -182,8 +182,8 @@ let orderDisabled = ref({
 const getTableData = async (orderId: number | undefined) => {
     let params: orderParam = { orderId: orderId };
     let res = await selectOrderList(params);
-    // console.log("res:", res.data[0]);
-    orderTable.value = res.data[0];
+    // console.log("res:", res.data.list[0]);
+    orderTable.value = res.data.list[0];
     // 解析图片地址参数
     fileList.value = orderTable.value.imgPath == null ? [] : JSON.parse(orderTable.value.imgPath);
     let j = 0;
