@@ -29,7 +29,7 @@ const props = defineProps({
     // 用户等级： 1.维修员 2.管理员 3.普通用户
     role: Number,
 });
-let tableData: Ref<userParam[]> = ref([]);
+let tableData: Ref<any[]> = ref([]);
 
 // --------查询用户列表----------
 const getTableData = async (role: number | undefined) => {
@@ -37,17 +37,17 @@ const getTableData = async (role: number | undefined) => {
         // 维修员
         let res = await selectRepairmanList();
         // console.log("res-1:", res);
-        tableData.value = res.data;
+        tableData.value = res.data.list;
     } else if (role === 2) {
         // 管理员
         let res = await selectAdminList();
         // console.log("res-2:", res);
-        tableData.value = res.data;
+        tableData.value = res.data.list;
     } else if (role === 3) {
         // 普通用户
         let res = await selectNorUserList();
         // console.log("res-3:", res);
-        tableData.value = res.data;
+        tableData.value = res.data.list;
     }
 };
 
@@ -63,7 +63,7 @@ const filterTableData = computed(() =>
 )
 
 // --------跳转修改--------
-const handleRevise = (index: number, row: userParam) => {
+const handleRevise = (index: number, row: any) => {
     console.log("index", index);
     console.log("row", row);
     userRouter.push({ path: "/user", query: { userId: row.id } });
