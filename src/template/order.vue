@@ -194,9 +194,9 @@ const getTableData = async (orderId: number | undefined) => {
         }
     }
 
-    if (res.data[0].progress === 0) {
+    if (res.data.list[0].progress === 0) {
         orderDisabled.value.adminInformation = false;
-    } else if (res.data[0].progress === 1) {
+    } else if (res.data.list[0].progress === 1) {
         orderDisabled.value.repairmanInformation = false;
     }
     // console.log("orderTable", orderTable.value);
@@ -214,13 +214,13 @@ const getRepairmanList = async () => {
     if (orderTable.value.progress === 0)
         return;
     let res = await selectRepairmanList();
-    repairmanList.value = res.data;
+    repairmanList.value = res.data.list;
     // console.log("repairmanList", repairmanList.value);
 }
 
 getRepairmanList();
 
-console.log("time", orderTable.value.timeDistribution);
+// console.log("time", orderTable.value.timeDistribution);
 
 // --------审批信息提交--------
 const adminInformationClick = async () => {
