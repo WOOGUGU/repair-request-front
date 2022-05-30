@@ -1,5 +1,6 @@
 import request from "./request";
 
+// 工单查找参数
 export interface orderParam {
   orderId?: number;
   position?: string;

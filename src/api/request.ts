@@ -22,6 +22,7 @@ service.interceptors.request.use(
 // 响应拦截器（在响应之后对数据进行一些处理）
 service.interceptors.response.use(
   (res) => {
+    console.log("响应拦截器-res", res);
     // 响应拦截器
     // console.log("响应拦截器");
     let data = res.data;

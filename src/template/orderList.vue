@@ -47,7 +47,7 @@ const getTableData = async (state: number | undefined) => {
     let params: orderParam = { progress: state };
     let res = await selectOrderList(params);
     // console.log("res:", res);
-    tableData.value = res.data;
+    tableData.value = res.data.list;
 };
 
 getTableData(props.state);
