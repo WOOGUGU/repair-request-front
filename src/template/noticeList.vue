@@ -30,28 +30,29 @@
 <script setup lang="ts">
 import { ref, Ref } from 'vue';
 import { noticeParam, selectNoticeList } from '@/api/notice';
+import { PickNotAny } from '@/components/__VLS_types';
 
-let tableData: Ref<noticeParam[]> = ref([]);
+let tableData: Ref<any[]> = ref([]);
 
 // 获取公告列表
 const getTableData = async () => {
     let res = await selectNoticeList();
     console.log("res:", res);
-    tableData.value = res.data;
+    tableData.value = res.data.list;
 };
 
 getTableData();
 
 // --------跳转修改--------
 // TODO: 跳转修改页面
-const handleRevise = (index: number, row: noticeParam) => {
+const handleRevise = (index: number, row: any) => {
     console.log("index", index);
     console.log("row", row);
 };
 
 // --------删除--------
 // TODO: 删除公告按钮实现
-const handleDelete = (index: number, row: noticeParam) => {
+const handleDelete = (index: number, row: any) => {
     console.log("index", index);
     console.log("row", row);
 };
