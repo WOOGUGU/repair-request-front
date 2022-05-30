@@ -28,28 +28,29 @@
 <script setup lang="ts">
 import { Ref, ref } from 'vue';
 import { carousel, selectCarouselList } from '@/api/carousel';
+import { AnyNaptrRecord } from 'dns';
 
-let tableData: Ref<carousel[]> = ref([]);
+let tableData: Ref<any[]> = ref([]);
 
 // 获取轮播图列表
 const getTableData = async () => {
     let res = await selectCarouselList();
     // console.log("res:", res);
-    tableData.value = res.data;
+    tableData.value = res.data.list;
 };
 
 getTableData();
 
 // --------跳转修改--------
 // TODO: 跳转修改页面
-const handleRevise = (index: number, row: carousel) => {
+const handleRevise = (index: number, row: any) => {
     console.log("index", index);
     console.log("row", row);
 };
 
 // --------删除--------
 // TODO: 删除用户按钮实现
-const handleDelete = (index: number, row: carousel) => {
+const handleDelete = (index: number, row: any) => {
     console.log("index", index);
     console.log("row", row);
 };
