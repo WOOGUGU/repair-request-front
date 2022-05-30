@@ -105,7 +105,7 @@
                     <el-select class=select v-model="orderTable.solver" placeholder="please select your zone"
                         :disabled="orderDisabled.adminInformation">
                         <el-option v-for="repairman, item in repairmanList" :label="repairman.username"
-                            :value="repairman.username" />
+                            :value="(repairman.username as string)" />
                     </el-select>
                 </el-form-item>
                 <el-form-item label="管理员留言">

@@ -27,6 +27,9 @@
                 </template>
             </el-table-column>
         </el-table>
+        <br />
+        <el-pagination v-model:currentPage="currentPage" :page-size="tableData.length" :disabled="disabled"
+            layout="total, prev, pager, next, jumper" :total="tableData.length" />
     </el-card>
 </template>
 
@@ -35,10 +38,17 @@ import { ref, Ref } from "vue";
 import { articleParam, selectArticlelList } from "@/api/article";
 
 let tableData: Ref<any[]> = ref([]);
+const currentPage = ref(1);
+const disabled = ref(true);
 
 // 获取文章列表
 const getArticleList = async () => {
-    const res = await selectArticlelList();
+    let params: articleParam = {
+        // TODO: 需绑定分页
+        pageNum: 1,
+        pageSize: 999,
+    };
+    const res = await selectArticlelList(params);
     // console.log("res", res);
     tableData.value = res.data.list;
 };
@@ -61,4 +71,9 @@ const handleDelete = (index: number, row: articleParam) => {
 </script>
 
 <style lang="less" scoped>
+.el-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 </style>

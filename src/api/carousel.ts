@@ -3,21 +3,24 @@ import { mainStore } from "@/store";
 const store = mainStore();
 
 // 轮播图
-export interface carousel {
-    id: number;
-    imgPath: string;
-    submitTime: string;
-    author: string;
+export interface carouselParam {
+    id?: number;
+    imgPath?: string;
+    submitTime?: string;
+    author?: string;
+    pageNum?: number;
+    pageSize?: number;
 };
 
 // 获取轮播图列表
-export const selectCarouselList = () => {
+export const selectCarouselList = (rs?: carouselParam) => {
     let res = request({
         headers: {
             "Content-Type": "application/json;",
         },
         url: "/v2/slide/selectAllSlide",
         method: "get",
+        params: rs,
     });
     return res;
 }

@@ -22,18 +22,28 @@
                 </template>
             </el-table-column>
         </el-table>
+        <br />
+        <el-pagination v-model:currentPage="currentPage" :page-size="tableData.length" :disabled="disabled"
+            layout="total, prev, pager, next, jumper" :total="tableData.length" />
     </el-card>
 </template>
 
 <script setup lang="ts">
 import { Ref, ref } from 'vue';
-import { selectCarouselList } from '@/api/carousel';
+import { carouselParam, selectCarouselList } from '@/api/carousel';
 
 let tableData: Ref<any[]> = ref([]);
+const currentPage = ref(1);
+const disabled = ref(true);
 
 // 获取轮播图列表
 const getTableData = async () => {
-    let res = await selectCarouselList();
+    let params: carouselParam = {
+        // TODO: 需绑定分页
+        pageNum: 1,
+        pageSize: 999,
+    };
+    let res = await selectCarouselList(params);
     // console.log("res:", res);
     tableData.value = res.data.list;
 };
@@ -56,4 +66,9 @@ const handleDelete = (index: number, row: any) => {
 </script>
 
 <style lang="less" scoped>
+.el-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 </style>

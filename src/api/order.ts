@@ -9,6 +9,8 @@ export interface orderParam {
   solver?: string;
   type?: string;
   username?: string;
+  pageNum?: number;
+  pageSize?: number;
 }
 
 // 万用查找

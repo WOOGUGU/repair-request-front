@@ -1,11 +1,48 @@
-# Vue 3 + Typescript + Vite
+# 开发进度记录
 
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## 2022-05-27
 
-## Recommended IDE Setup
+_首次记录_
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+- [x] 登入页面
+- [x] 响应拦截器-401
+- [x] 响应拦截器-400
+- [x] 工单列表页面
+- [x] 工单详情页面
+- [x] 工单详情-分配管理员
+- [x] 工单详情-驳回工单
+- [x] 用户列表页面
 
-## Type Support For `.vue` Imports in TS
+## 2022-05-28
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's `.vue` type support plugin by running `Volar: Switch TS Plugin on/off` from VSCode command palette.
+- [x] 轮播图列表
+
+## 2022-05-29
+
+- [x] 通知列表
+- [x] 文章列表
+- [x] 编辑用户
+- [x] 筛选用户
+- [x] 添加用户
+
+## 2022-05-30
+
+- [x] 添加轮播图
+- [x] 修复因接口改动导致功能失效
+
+---
+
+# 待开发功能
+
+- P0：
+- P1:
+  - [ ] 编辑通知
+  - [ ] 添加通知
+  - [ ] 编辑文章
+  - [ ] 添加文章
+- p2:
+  - [ ] 轮播图列表-点击图片放大查看
+  - [ ] 删除轮播图
+  - [ ] 删除用户
+  - [ ] 删除通知
+  - [ ] 删除文章

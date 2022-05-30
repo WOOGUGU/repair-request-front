@@ -45,6 +45,9 @@ const handleDetails = (index: number, row: order) => {
 };
 const getTableData = async (state: number | undefined) => {
     let params: orderParam = { progress: state };
+    // TODO: 需绑定分页
+    params.pageNum = 1;
+    params.pageSize = 999;
     let res = await selectOrderList(params);
     // console.log("res:", res);
     tableData.value = res.data.list;

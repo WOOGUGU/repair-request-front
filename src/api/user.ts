@@ -3,48 +3,52 @@ import md5 from "js-md5";
 
 // 人员通用格式
 export interface userParam {
-    id: number,
-    username: string,
-    name: string,
-    tel: string,
+    id?: number,
+    username?: string,
+    name?: string,
+    tel?: string,
     password?: string,
     roles?: any[],
-    // 修改时等级格式
+    pageNum?: number,
+    pageSize?: number,
     roleTypes?: string[],
 }
 
 // 查找管理员列表
-export const selectAdminList = () => {
+export const selectAdminList = (rs?: userParam) => {
     let res = request({
         headers: {
             "Content-Type": "application/json;",
         },
         url: "/v2/user/selectAllAdmin",
         method: "get",
+        params: rs,
     });
     return res;
 };
 
 // 查找维修员列表
-export const selectRepairmanList = () => {
+export const selectRepairmanList = (rs?: userParam) => {
     let res = request({
         headers: {
             "Content-Type": "application/json;",
         },
         url: "/v2/user/selectAllRepairman",
         method: "get",
+        params: rs,
     });
     return res;
 };
 
 // 查找普通用户列表
-export const selectNorUserList = () => {
+export const selectNorUserList = (rs?: userParam) => {
     let res = request({
         headers: {
             "Content-Type": "application/json;",
         },
         url: "/v2/user/selectAllNorUser",
         method: "get",
+        params: rs,
     });
     return res;
 }
