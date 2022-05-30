@@ -99,6 +99,12 @@
               </el-icon>
               <span>轮播图列表</span>
             </el-menu-item>
+            <el-menu-item index="4-2" class="children" @click="savePath('carousel')">
+              <el-icon>
+                <plus />
+              </el-icon>
+              <span>添加轮播图</span>
+            </el-menu-item>
           </el-sub-menu>
           <!-- 公告管理 -->
           <el-sub-menu index="5">
