@@ -34,20 +34,20 @@
 import { ref, Ref } from "vue";
 import { articleParam, selectArticlelList } from "@/api/article";
 
-let tableData: Ref<articleParam[]> = ref([]);
+let tableData: Ref<any[]> = ref([]);
 
 // 获取文章列表
 const getArticleList = async () => {
     const res = await selectArticlelList();
     // console.log("res", res);
-    tableData.value = res.data;
+    tableData.value = res.data.list;
 };
 
 getArticleList();
 
 // --------跳转修改--------
 // TODO: 跳转修改页面
-const handleRevise = (index: number, row: articleParam) => {
+const handleRevise = (index: number, row: any) => {
     console.log("index", index);
     console.log("row", row);
 };
