@@ -9,7 +9,7 @@
                 </template>
             </el-table-column>
             <el-table-column prop="content" label="公告内容" min-width="250px" />
-            <el-table-column prop="author" label="上传者" width="100px" />
+            <el-table-column prop="author" label="上传者" width="150px" />
             <el-table-column prop="createTime" label="创建时间" width="200px" sortable />
             <el-table-column prop="announceTime" label="发布时间" width="200px" sortable />
             <el-table-column prop="updateTime" label="修改时间" width="200px" sortable />
@@ -32,7 +32,8 @@
 
 <script setup lang="ts">
 import { ref, Ref } from 'vue';
-import { noticeParam, selectNoticeList } from '@/api/notice';
+import { noticeParam, selectNoticeList, deleteNotice } from '@/api/notice';
+import { ElMessageBox, ElMessage } from "element-plus";
 import { useRouter } from 'vue-router'
 const userRouter = useRouter()
 
@@ -48,7 +49,7 @@ const getTableData = async () => {
         pageSize: 999,
     };
     let res = await selectNoticeList(params);
-    console.log("res:", res);
+    // console.log("res:", res);
     tableData.value = res.data.list;
 };
 
@@ -57,16 +58,32 @@ getTableData();
 // --------跳转修改--------
 // TODO: 跳转修改页面
 const handleRevise = (index: number, row: any) => {
-    console.log("index", index);
-    console.log("row", row);
+    // console.log("index", index);
+    // console.log("row", row);
     userRouter.push({ path: '/notice', query: { noticeId: row.id } });
 };
 
 // --------删除--------
 // TODO: 删除公告按钮实现
 const handleDelete = (index: number, row: any) => {
-    console.log("index", index);
-    console.log("row", row);
+    // 弹窗提醒
+    ElMessageBox.confirm('是否要更改该公告?', '请确认', {
+        confirmButtonText: '确认修改',
+        cancelButtonText: '取消',
+        type: 'warning',
+    }).then(async () => {
+        let params: noticeParam = {
+            noticeId: row.id,
+        };
+        let res = await deleteNotice(params);
+        // console.log("res:", res);
+        if (res.code === "00000") {
+            ElMessage({ showClose: true, message: "修改成功~", type: "success", duration: 1000 });
+            getTableData();
+        } else {
+            ElMessage({ showClose: true, message: "修改失败：" + res.userMsg, type: "error", duration: 1000 });
+        }
+    }).catch()
 };
 </script>
 

@@ -42,7 +42,7 @@ export const selectNoticeById = (rs: any) => {
 
 // 修改公告
 export const updateNotice = (rs: any) => {
-    console.log("rs", rs);
+    // console.log("rs", rs);
     let res = request({
         url: "/v2/notice/updateNotice",
         method: "post",
@@ -53,9 +53,20 @@ export const updateNotice = (rs: any) => {
 
 // 新增公告
 export const addNotice = (rs: any) => {
-    console.log("rs", rs);
+    // console.log("rs", rs);
     let res = request({
         url: "/v2/notice/addNotice",
+        method: "post",
+        data: qs.stringify(rs),
+    });
+    return res;
+}
+
+// 删除公告
+export const deleteNotice = (rs: any) => {
+    // console.log("rs", rs);
+    let res = request({
+        url: "/v2/notice/deleteNotice",
         method: "post",
         data: qs.stringify(rs),
     });
