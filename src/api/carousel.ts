@@ -1,5 +1,7 @@
 import request from "./request";
 import { mainStore } from "@/store";
+import qs from "qs";
+
 const store = mainStore();
 
 // 轮播图
@@ -10,7 +12,8 @@ export interface carouselParam {
     author?: string;
     pageNum?: number;
     pageSize?: number;
-};
+    slideId?: number;
+}
 
 // 获取轮播图列表
 export const selectCarouselList = (rs?: carouselParam) => {
@@ -37,6 +40,17 @@ export const uploadCarousel = (rs: any) => {
         url: "/v2/slide/uploadStreamSlide",
         method: "post",
         data: rs,
+    });
+    return res;
+}
+
+// 删除轮播图
+export const deleteCarousel = (rs: any) => {
+    // console.log("rs", rs);
+    let res = request({
+        url: "/v2/slide/deleteSlide",
+        method: "post",
+        data: qs.stringify(rs),
     });
     return res;
 }

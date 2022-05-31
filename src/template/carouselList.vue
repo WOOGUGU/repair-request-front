@@ -30,7 +30,8 @@
 
 <script setup lang="ts">
 import { Ref, ref } from 'vue';
-import { carouselParam, selectCarouselList } from '@/api/carousel';
+import { carouselParam, selectCarouselList, deleteCarousel } from '@/api/carousel';
+import { ElMessage, ElMessageBox } from "element-plus";
 
 let tableData: Ref<any[]> = ref([]);
 const currentPage = ref(1);
@@ -60,8 +61,29 @@ const handleRevise = (index: number, row: any) => {
 // --------删除--------
 // TODO: 删除用户按钮实现
 const handleDelete = (index: number, row: any) => {
-    console.log("index", index);
-    console.log("row", row);
+    console.log("row", row.id);
+
+    // 弹窗确认
+    ElMessageBox.confirm("确认删除轮播图“" + row.id + "”？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+    }).then(async (res: any) => {
+        if (res) {
+            let params: any = { slideId: row.id, };
+            let res = await deleteCarousel(params);
+            // console.log("res:", res);
+            if (res.code === "00000") {
+                ElMessage({ showClose: true, message: "删除轮播图成功~", type: "success", duration: 1000 });
+                setTimeout(() => {
+                    // userRouter.push({ path: "/user", query: { userId: res.data } });
+                    location.reload();
+                }, 1100);
+            } else {
+                ElMessage({ showClose: true, message: "删除失败：" + res.userMsg, type: "error", duration: 1000 });
+            }
+        }
+    });
 };
 </script>
 
