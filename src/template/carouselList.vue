@@ -38,6 +38,7 @@ const currentPage = ref(1);
 const disabled = ref(true);
 
 // 获取轮播图列表
+// FIXME： 请求方法不对，暂时用下面的方法代替
 const getTableData = async () => {
     let params: carouselParam = {
         // TODO: 需绑定分页
@@ -75,10 +76,7 @@ const handleDelete = (index: number, row: any) => {
             // console.log("res:", res);
             if (res.code === "00000") {
                 ElMessage({ showClose: true, message: "删除轮播图成功~", type: "success", duration: 1000 });
-                setTimeout(() => {
-                    // userRouter.push({ path: "/user", query: { userId: res.data } });
-                    location.reload();
-                }, 1100);
+                getTableData();
             } else {
                 ElMessage({ showClose: true, message: "删除失败：" + res.userMsg, type: "error", duration: 1000 });
             }

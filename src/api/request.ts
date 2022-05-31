@@ -30,26 +30,29 @@ service.interceptors.response.use(
     return data;
   },
   (error) => {
-    // console.log("error", error.response);
-    // 拦截401错误，跳转到登录页面
-    if (error.response.status === 401) {
-      router.push("/login");
-      ElMessage({
-        showClose: true,
-        message: "登录过期，请重新登录",
-        type: "error",
-        duration: 1000,
-      });
-      return Promise.reject(new Error("登录过期"));
-    }
-    // 拦截400错误
-    if (error.response.status === 400) {
-      ElMessage({
-        showClose: true,
-        message: "参数错误，请检查是否填写完整",
-        type: "error",
-        duration: 1000,
-      })
+    console.log("error", error);
+    if (error.response.status) {
+      switch (error.response.status) {
+        case 400:
+          ElMessage.error("参数错误");
+          break;
+        case 401:
+          ElMessage.error("登录失效，请重新登录");
+          router.push("/login");
+          break;
+        case 403:
+          ElMessage.error("没有权限");
+          break;
+        case 404:
+          ElMessage.error("请求资源不存在");
+          break;
+        case 500:
+          ElMessage.error("服务器错误");
+          break;
+        default:
+          ElMessage.error("未知错误");
+          break;
+      }
     }
     return Promise.reject(new Error("参数错误"));
   }
