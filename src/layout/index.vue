@@ -120,7 +120,7 @@
               </el-icon>
               <span>公告列表</span>
             </el-menu-item>
-            <el-menu-item index="5-2" class="children" @click="savePath('notice')">
+            <el-menu-item index="5-2" class="children" @click="savePath('addNotice')">
               <el-icon>
                 <plus />
               </el-icon>

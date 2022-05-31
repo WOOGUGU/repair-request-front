@@ -50,3 +50,14 @@ export const updateNotice = (rs: any) => {
     });
     return res;
 }
+
+// 新增公告
+export const addNotice = (rs: any) => {
+    console.log("rs", rs);
+    let res = request({
+        url: "/v2/notice/addNotice",
+        method: "post",
+        data: qs.stringify(rs),
+    });
+    return res;
+}

@@ -5,15 +5,16 @@
                 <el-input v-model="userData.id" placeholder="编号由系统自动分配" disabled></el-input>
             </el-form-item>
             <el-form-item label="上传者">
-                <el-input v-model="userData.author" placeholder="当前用户" disabled></el-input>
+                <el-input v-model="userData.author" placeholder="当前用户" disabled>
+                </el-input>
             </el-form-item>
-            <el-form-item label="创建时间">
+            <el-form-item v-if="isExistNotice" label="创建时间">
                 <el-input v-model="userData.createTime" placeholder="自动获取" disabled></el-input>
             </el-form-item>
-            <el-form-item label="发布时间">
+            <el-form-item v-if="isExistNotice" label="发布时间">
                 <el-input v-model="userData.announceTime" placeholder="自动获取" disabled> </el-input>
             </el-form-item>
-            <el-form-item label="修改时间">
+            <el-form-item v-if="isExistNotice" label="修改时间">
                 <el-input v-model="userData.updateTime" placeholder="自动获取" disabled></el-input>
             </el-form-item>
             <el-form-item label="公告内容">
@@ -26,7 +27,8 @@
                 </el-radio-group>
             </el-form-item>
             <el-form-item>
-                <el-button type="warning" @click="handleUpdateSubmit" plain>提交更改</el-button>
+                <el-button v-if="!isExistNotice" type="primary" @click="handleAddSubmit" plain>添加公告</el-button>
+                <el-button v-if="isExistNotice" type="warning" @click="handleUpdateSubmit" plain>提交更改</el-button>
             </el-form-item>
 
         </el-form>
@@ -35,15 +37,19 @@
 
 <script setup lang="ts">
 import { ref, Ref } from "vue";
-import { noticeParam, selectNoticeById, updateNotice } from "@/api/notice";
+import { noticeParam, selectNoticeById, updateNotice, addNotice } from "@/api/notice";
 import { ElMessage, ElMessageBox } from "element-plus";
+import { mainStore } from "@/store";
 import { useRoute } from 'vue-router';
 import { useRouter } from 'vue-router'
+const store = mainStore();
 const route = useRoute();
 const userRouter = useRouter()
 
 // 公告信息
 let userData: Ref<any> = ref({});
+// 是否存在公告
+let isExistNotice: Ref<boolean> = ref(true);
 
 // 根据id查询公告信息
 const getNoticeById = async (id: number) => {
@@ -58,7 +64,14 @@ const getNoticeById = async (id: number) => {
 
 };
 
-getNoticeById(Number(route.query.noticeId));
+// 判断时候为新增
+if (route.query.noticeId) {
+    getNoticeById(Number(route.query.noticeId));
+} else {
+    isExistNotice.value = false;
+    userData.value.author = store.userName;
+    console.log("是新增");
+}
 
 // 提交修改
 const handleUpdateSubmit = () => {
@@ -86,6 +99,25 @@ const handleUpdateSubmit = () => {
             ElMessage({ showClose: true, message: "修改失败：" + res.userMsg, type: "error", duration: 1000 });
         }
     }).catch()
+};
+
+// 提交新增
+const handleAddSubmit = async () => {
+    let params: noticeParam = {
+        author: userData.value.author,
+        content: userData.value.content,
+        displayStatus: Number(userData.value.displayStatus),
+    };
+    let res = await addNotice(params);
+    console.log("res:", res);
+    if (res.code === "00000") {
+        ElMessage({ showClose: true, message: "添加成功~", type: "success", duration: 1000 });
+        // 重置表单
+        userData.value = {}
+        userData.value.author = store.userName;
+    } else {
+        ElMessage({ showClose: true, message: "添加失败：" + res.userMsg, type: "error", duration: 1000 });
+    }
 };
 
 </script>
