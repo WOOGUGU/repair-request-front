@@ -141,6 +141,12 @@
               </el-icon>
               <span>文章列表</span>
             </el-menu-item>
+            <el-menu-item index="6-2" class="children" @click="savePath('addArticle')">
+              <el-icon>
+                <plus />
+              </el-icon>
+              <span>添加文章</span>
+            </el-menu-item>
           </el-sub-menu>
           <!-- 面板设置 -->
           <el-menu-item index="999" disabled>

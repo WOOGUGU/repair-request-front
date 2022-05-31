@@ -5,7 +5,7 @@
             <el-table-column label="状态" width="85px">
                 <template #default="scope">
                     <span v-if="scope.row.displayStatus === 1">显示</span>
-                    <span v-else-if="scope.row.displayStatus === 0">隐藏</span>
+                    <span v-else-if="scope.row.displayStatus === 2">隐藏</span>
                 </template>
             </el-table-column>
             <el-table-column label="标题" width="300px">
@@ -42,7 +42,9 @@
 
 <script setup lang="ts">
 import { ref, Ref } from "vue";
-import { articleParam, selectArticlelList } from "@/api/article";
+import { articleParam, selectArticlelList, deleteArticle } from "@/api/article";
+import { ElMessage, ElMessageBox } from "element-plus";
+import router from "@/router";
 
 let tableData: Ref<any[]> = ref([]);
 const currentPage = ref(1);
@@ -65,15 +67,33 @@ getArticleList();
 // --------跳转修改--------
 // TODO: 跳转修改页面
 const handleRevise = (index: number, row: any) => {
-    console.log("index", index);
-    console.log("row", row);
+    // console.log("index", index);
+    // console.log("row", row);
+    // 跳转
+    router.push({ path: "/article", query: { articleId: row.id } });
 };
 
 // --------删除--------
 // TODO: 删除用户按钮实现
 const handleDelete = (index: number, row: articleParam) => {
-    console.log("index", index);
-    console.log("row", row);
+    // 弹窗确认
+    ElMessageBox.confirm("确认删除文章“" + row.title + "”？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+    }).then(async (res: any) => {
+        if (res) {
+            let params: any = { articleId: row.id, };
+            let res = await deleteArticle(params);
+            // console.log("res:", res);
+            if (res.code === "00000") {
+                ElMessage({ showClose: true, message: "删除文章成功~", type: "success", duration: 1000 });
+                getArticleList();
+            } else {
+                ElMessage({ showClose: true, message: "删除失败：" + res.userMsg, type: "error", duration: 1000 });
+            }
+        }
+    });
 };
 </script>
 

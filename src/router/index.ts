@@ -90,6 +90,15 @@ const routes = [
         path: "/articleList",
         name: "articleList",
         component: () => import("../views/articleList/index.vue"),
+      },
+      {
+        path: "/article",
+        name: "article",
+        component: () => import("../views/article/index.vue"),
+      }, {
+        path: "/addArticle",
+        name: "addArticle",
+        component: () => import("../views/addArticle/index.vue"),
       }
     ],
   },
