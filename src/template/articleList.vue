@@ -13,6 +13,13 @@
                     <a :href="scope.row.contentPath" target="_blank">{{ scope.row.title }}</a>
                 </template>
             </el-table-column>
+            <!-- 图片预览 -->
+            <el-table-column label="封面图片" min-width="200px">
+                <template #default="scope">
+                    <a class="img-path" :href="scope.row.coverPath" target="_blank">{{ scope.row.coverPath }}</a>
+                    <!-- <img :src="scope.row.coverPath" style="width: 100px; height: 100px;"> -->
+                </template>
+            </el-table-column>
             <el-table-column prop="author" label="上传者" width="100px" />
             <el-table-column prop="createTime" label="创建时间" width="200px" sortable />
             <el-table-column prop="updateTime" label="修改时间" width="200px" sortable />
@@ -75,5 +82,13 @@ const handleDelete = (index: number, row: articleParam) => {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.img-path {
+    // 溢出隐藏
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 </style>
