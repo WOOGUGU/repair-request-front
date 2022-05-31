@@ -56,7 +56,6 @@ const getTableData = async () => {
 getTableData();
 
 // --------跳转修改--------
-// TODO: 跳转修改页面
 const handleRevise = (index: number, row: any) => {
     // console.log("index", index);
     // console.log("row", row);
@@ -64,11 +63,10 @@ const handleRevise = (index: number, row: any) => {
 };
 
 // --------删除--------
-// TODO: 删除公告按钮实现
 const handleDelete = (index: number, row: any) => {
     // 弹窗提醒
-    ElMessageBox.confirm('是否要更改该公告?', '请确认', {
-        confirmButtonText: '确认修改',
+    ElMessageBox.confirm('是否要删除该公告?', '请确认', {
+        confirmButtonText: '确认删除',
         cancelButtonText: '取消',
         type: 'warning',
     }).then(async () => {
@@ -78,10 +76,10 @@ const handleDelete = (index: number, row: any) => {
         let res = await deleteNotice(params);
         // console.log("res:", res);
         if (res.code === "00000") {
-            ElMessage({ showClose: true, message: "修改成功~", type: "success", duration: 1000 });
+            ElMessage({ showClose: true, message: "删除成功~", type: "success", duration: 1000 });
             getTableData();
         } else {
-            ElMessage({ showClose: true, message: "修改失败：" + res.userMsg, type: "error", duration: 1000 });
+            ElMessage({ showClose: true, message: "删除失败：" + res.userMsg, type: "error", duration: 1000 });
         }
     }).catch()
 };

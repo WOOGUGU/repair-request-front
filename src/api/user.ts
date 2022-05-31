@@ -1,5 +1,6 @@
 import request from "./request";
 import md5 from "js-md5";
+import qs from "qs";
 
 // 人员通用格式
 export interface userParam {
@@ -12,6 +13,7 @@ export interface userParam {
     pageNum?: number,
     pageSize?: number,
     roleTypes?: string[],
+    userId?: number,
 }
 
 // 查找管理员列表
@@ -94,6 +96,17 @@ export const addUser = (rs: any) => {
         url: "/v2/user/addUser",
         method: "post",
         data: rs,
+    });
+    return res;
+}
+
+// 删除用户
+export const deleteUser = (rs: userParam) => {
+    // console.log("rs", rs);
+    let res = request({
+        url: "/v2/user/deleteUser",
+        method: "post",
+        data: qs.stringify(rs),
     });
     return res;
 }
