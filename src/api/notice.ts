@@ -1,4 +1,5 @@
 import request from "./request";
+import qs from "qs";
 
 export interface noticeParam {
     id?: number,
@@ -7,8 +8,10 @@ export interface noticeParam {
     updateTime?: string,
     content?: string,
     author?: string,
-    pageNum?: number;
-    pageSize?: number;
+    displayStatus?: number,
+    pageNum?: number,
+    pageSize?: number,
+    noticeId?: number,
 }
 
 // 获取公告列表
@@ -20,6 +23,30 @@ export const selectNoticeList = (rs?: noticeParam) => {
         url: "/v2/notice/selectAllNotice",
         method: "get",
         params: rs,
+    });
+    return res;
+}
+
+// 通过id获取公告
+export const selectNoticeById = (rs: any) => {
+    let res = request({
+        headers: {
+            "Content-Type": "application/json;",
+        },
+        url: "/v2/notice/selectNotice",
+        method: "get",
+        params: rs,
+    });
+    return res;
+}
+
+// 修改公告
+export const updateNotice = (rs: any) => {
+    console.log("rs", rs);
+    let res = request({
+        url: "/v2/notice/updateNotice",
+        method: "post",
+        data: qs.stringify(rs),
     });
     return res;
 }

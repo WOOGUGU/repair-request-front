@@ -5,7 +5,7 @@
             <el-table-column label="状态" width="85px">
                 <template #default="scope">
                     <span v-if="scope.row.displayStatus === 1">显示</span>
-                    <span v-else-if="scope.row.displayStatus === 0">隐藏</span>
+                    <span v-else-if="scope.row.displayStatus === 2">隐藏</span>
                 </template>
             </el-table-column>
             <el-table-column prop="content" label="公告内容" min-width="250px" />
@@ -33,6 +33,8 @@
 <script setup lang="ts">
 import { ref, Ref } from 'vue';
 import { noticeParam, selectNoticeList } from '@/api/notice';
+import { useRouter } from 'vue-router'
+const userRouter = useRouter()
 
 let tableData: Ref<any[]> = ref([]);
 const currentPage = ref(1);
@@ -57,6 +59,7 @@ getTableData();
 const handleRevise = (index: number, row: any) => {
     console.log("index", index);
     console.log("row", row);
+    userRouter.push({ path: '/notice', query: { noticeId: row.id } });
 };
 
 // --------删除--------

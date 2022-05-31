@@ -120,6 +120,12 @@
               </el-icon>
               <span>公告列表</span>
             </el-menu-item>
+            <el-menu-item index="5-2" class="children" @click="savePath('notice')">
+              <el-icon>
+                <plus />
+              </el-icon>
+              <span>添加公告</span>
+            </el-menu-item>
           </el-sub-menu>
           <!-- 文章管理 -->
           <el-sub-menu index="6">
