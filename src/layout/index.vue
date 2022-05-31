@@ -78,11 +78,11 @@
               </el-icon>
               <span>普通用户列表</span>
             </el-menu-item>
-            <el-menu-item index="3-4" class="children" @click="savePath('user')">
+            <el-menu-item index="3-4" class="children" @click="savePath('addUser')">
               <el-icon>
                 <plus />
               </el-icon>
-              <span>添加管理员</span>
+              <span>添加用户</span>
             </el-menu-item>
           </el-sub-menu>
           <!-- 轮播图管理 -->

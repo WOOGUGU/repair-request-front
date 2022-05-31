@@ -62,6 +62,11 @@ const routes = [
         component: () => import("../views/user/index.vue"),
       },
       {
+        path: "/addUser",
+        name: "addUser",
+        component: () => import("../views/addUser/index.vue"),
+      },
+      {
         path: "/carouselList",
         name: "carouselList",
         component: () => import("../views/carouselList/index.vue"),
