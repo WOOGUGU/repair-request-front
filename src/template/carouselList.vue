@@ -11,11 +11,8 @@
             <el-table-column prop="imgPath" label="图片路径" width="300px" />
             <el-table-column prop="author" label="上传者" width="100px" />
             <el-table-column prop="submitTime" label="提交时间" width="200px" />
-            <el-table-column label="操作" fixed="right" width="150px">
+            <el-table-column label="操作" fixed="right" width="100px">
                 <template #default="scope">
-                    <el-button color="#626aef" @click="handleRevise(scope.$index, scope.row)" size="small" plain>
-                        修改
-                    </el-button>
                     <el-button type="danger" @click="handleDelete(scope.$index, scope.row)" size="small" plain>
                         删除
                     </el-button>
@@ -52,15 +49,7 @@ const getTableData = async () => {
 
 getTableData();
 
-// --------跳转修改--------
-// TODO: 跳转修改页面
-const handleRevise = (index: number, row: any) => {
-    console.log("index", index);
-    console.log("row", row);
-};
-
 // --------删除--------
-// TODO: 删除用户按钮实现
 const handleDelete = (index: number, row: any) => {
     console.log("row", row.id);
 
