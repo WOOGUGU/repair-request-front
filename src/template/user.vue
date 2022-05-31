@@ -20,7 +20,7 @@
             <el-form-item v-if="!isExistUser" label="确认密码">
                 <el-input v-model="userData.password2" placeholder="请再次输入密码" show-password></el-input>
             </el-form-item>
-            <!-- XXX：修改为从数据库查询用户等级列表，动态获取 -->
+            <!-- TODO：修改为从数据库查询用户等级列表，动态获取 -->
             <el-form-item label="用户等级">
                 <el-checkbox-group v-model="userData.roleTypes">
                     <el-checkbox label="1">维修员</el-checkbox>
@@ -67,10 +67,10 @@ const getUserById = async (id: number) => {
 
 // 判断是否为添加用户
 if (route.query.userId) {
-    console.log("修改用户")
+    // console.log("修改用户")
     getUserById(Number(route.query.userId));
 } else {
-    console.log("添加用户")
+    // console.log("添加用户")
     isExistUser = false;
 }
 
@@ -91,11 +91,8 @@ const handleAddSubmit = async () => {
             // console.log("res:", res);
             if (res.code === "00000") {
                 ElMessage({ showClose: true, message: "添加用户成功~", type: "success", duration: 1000 });
-                // TODO：跳转到用户详情页
-                setTimeout(() => {
-                    // userRouter.push({ path: "/user", query: { userId: res.data } });
-                    location.reload();
-                }, 1100);
+                // 重置表单
+                userData.value = {};
             } else {
                 ElMessage({ showClose: true, message: "添加失败：" + res.userMsg, type: "error", duration: 1000 });
             }
@@ -115,10 +112,6 @@ const handleUpdateSubmit = () => {
         // console.log("res:", res);
         if (res.code === "00000") {
             ElMessage({ showClose: true, message: "修改成功~", type: "success", duration: 1000 });
-            // FIXME: 刷新页面改为页面回退/刷新组件
-            setTimeout(() => {
-                location.reload();
-            }, 1100);
         } else {
             ElMessage({ showClose: true, message: "修改失败：" + res.userMsg, type: "error", duration: 1000 });
         }

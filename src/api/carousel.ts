@@ -31,8 +31,8 @@ export const selectCarouselList = (rs?: carouselParam) => {
 // 添加轮播图
 export const uploadCarousel = (rs: any) => {
     rs.append("author", store.userName);
-    console.log("rs.author", rs.get("author"));
-    console.log("rs.fileStreams", rs.get("fileStreams"));
+    // console.log("rs.author", rs.get("author"));
+    // console.log("rs.fileStreams", rs.get("fileStreams"));
     let res = request({
         headers: {
             "Content-Type": "application/json;",

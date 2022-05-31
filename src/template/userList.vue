@@ -79,8 +79,6 @@ const filterTableData = computed(() =>
 
 // --------跳转修改--------
 const handleRevise = (index: number, row: any) => {
-    // console.log("index", index);
-    // console.log("row", row);
     userRouter.push({ path: "/user", query: { userId: row.id } });
 };
 

@@ -57,8 +57,6 @@ getTableData();
 
 // --------跳转修改--------
 const handleRevise = (index: number, row: any) => {
-    // console.log("index", index);
-    // console.log("row", row);
     userRouter.push({ path: '/notice', query: { noticeId: row.id } });
 };
 

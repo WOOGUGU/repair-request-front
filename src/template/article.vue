@@ -71,7 +71,7 @@ if (route.query.articleId) {
 } else {
     isExistArticle.value = false;
     articleData.value.author = store.userName;
-    console.log("是新增");
+    // console.log("是新增");
 }
 
 // 提交更改

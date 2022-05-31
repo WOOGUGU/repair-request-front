@@ -100,11 +100,11 @@
                         :disabled="orderDisabled.adminInformation" /> -->
                     <el-input class="input" placeholder="暂不记录管理员信息" :disabled="orderDisabled.orderInformation" />
                 </el-form-item>
-                <!-- BUG：选项以维修员姓名为标识(name) -->
                 <el-form-item label="选择维修员">
-                    <el-select class=select v-model="orderTable.solver" placeholder="please select your zone"
+                    <el-select class=select v-model="orderTable.solver" placeholder="请选择维修员"
                         :disabled="orderDisabled.adminInformation">
-                        <el-option v-for="repairman, item in repairmanList" :label="repairman.username"
+                        <el-option v-for="repairman, item in repairmanList"
+                            :label="repairman.username + ' : ' + repairman.name"
                             :value="(repairman.username as string)" />
                     </el-select>
                 </el-form-item>

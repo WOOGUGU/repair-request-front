@@ -70,7 +70,7 @@ if (route.query.noticeId) {
 } else {
     isExistNotice.value = false;
     userData.value.author = store.userName;
-    console.log("是新增");
+    // console.log("是新增");
 }
 
 // 提交修改
@@ -91,10 +91,6 @@ const handleUpdateSubmit = () => {
         // console.log("res:", res);
         if (res.code === "00000") {
             ElMessage({ showClose: true, message: "修改成功~", type: "success", duration: 1000 });
-            // FIXME: 刷新页面改为页面回退/刷新组件
-            setTimeout(() => {
-                location.reload();
-            }, 1100);
         } else {
             ElMessage({ showClose: true, message: "修改失败：" + res.userMsg, type: "error", duration: 1000 });
         }
@@ -102,22 +98,29 @@ const handleUpdateSubmit = () => {
 };
 
 // 提交新增
-const handleAddSubmit = async () => {
-    let params: noticeParam = {
-        author: userData.value.author,
-        content: userData.value.content,
-        displayStatus: Number(userData.value.displayStatus),
-    };
-    let res = await addNotice(params);
-    console.log("res:", res);
-    if (res.code === "00000") {
-        ElMessage({ showClose: true, message: "添加成功~", type: "success", duration: 1000 });
-        // 重置表单
-        userData.value = {}
-        userData.value.author = store.userName;
-    } else {
-        ElMessage({ showClose: true, message: "添加失败：" + res.userMsg, type: "error", duration: 1000 });
-    }
+const handleAddSubmit = () => {
+    // 弹窗提醒
+    ElMessageBox.confirm('是否要添加该公告?', '请确认', {
+        confirmButtonText: '确认添加',
+        cancelButtonText: '取消',
+        type: 'warning',
+    }).then(async () => {
+        let params: noticeParam = {
+            author: userData.value.author,
+            content: userData.value.content,
+            displayStatus: Number(userData.value.displayStatus),
+        };
+        let res = await addNotice(params);
+        // console.log("res:", res);
+        if (res.code === "00000") {
+            ElMessage({ showClose: true, message: "添加成功~", type: "success", duration: 1000 });
+            // 重置表单
+            userData.value = {}
+            userData.value.author = store.userName;
+        } else {
+            ElMessage({ showClose: true, message: "添加失败：" + res.userMsg, type: "error", duration: 1000 });
+        }
+    }).catch()
 };
 
 </script>

@@ -31,7 +31,7 @@ export const selectArticlelList = (rs?: articleParam) => {
 
 // 通过id获取文章
 export const selectArticleById = (rs: articleParam) => {
-    console.log("rs", rs);
+    // console.log("rs", rs);
     let res = request({
         headers: {
             "Content-Type": "application/json;",
@@ -45,7 +45,7 @@ export const selectArticleById = (rs: articleParam) => {
 
 // 修改文章
 export const updateArticle = (rs: articleParam) => {
-    console.log("rs", rs);
+    // console.log("rs", rs);
     let res = request({
         url: "/v2/article/updateArticle",
         method: "post",
@@ -56,7 +56,7 @@ export const updateArticle = (rs: articleParam) => {
 
 // 新增文章
 export const addArticle = (rs: articleParam) => {
-    console.log("rs", rs);
+    // console.log("rs", rs);
     let res = request({
         url: "/v2/article/addArticle",
         method: "post",
@@ -67,7 +67,7 @@ export const addArticle = (rs: articleParam) => {
 
 // 删除文章
 export const deleteArticle = (rs: articleParam) => {
-    console.log("rs", rs);
+    // console.log("rs", rs);
     let res = request({
         url: "/v2/article/deleteArticle",
         method: "post",

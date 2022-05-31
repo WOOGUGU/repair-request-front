@@ -24,26 +24,15 @@ import { Plus } from '@element-plus/icons-vue'
 import { uploadCarousel } from '@/api/carousel'
 import { UploadUserFile, ElMessage } from 'element-plus'
 
-const fileList = ref<UploadUserFile[]>([
-    // {
-    //     name: 'food.jpeg',
-    //     url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-    // },
-    // {
-    //     name: '543.jpg',
-    //     url: 'https://slide-1257191112.cos.ap-nanjing.myqcloud.com/slide/1653713519543.jpg',
-    // },
-    // {
-    //     name: '254.jpg',
-    //     url: 'https://slide-1257191112.cos.ap-nanjing.myqcloud.com/slide/1653713560254.jpg',
-    // },
-])
+const fileList = ref<UploadUserFile[]>([])
 
 const dialogImageUrl = ref('')
 const dialogVisible = ref(false)
 
 
 // 上传图片按钮
+// BUG：无法上传较大图片
+// FIXME： 上传逻辑需要优化，不能直接上传到服务器，需要先获取COS相关信息，再直接上传到COS服务器中
 const uploadImg = async () => {
     // console.log("fileList", fileList.value)
     // list转formdata

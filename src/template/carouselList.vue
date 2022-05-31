@@ -8,8 +8,8 @@
                     <el-image style="width: 100px; height: 100px" :src="scope.row.imgPath" fit="contain" />
                 </template>
             </el-table-column>
-            <el-table-column prop="imgPath" label="图片路径" width="300px" />
-            <el-table-column prop="author" label="上传者" width="100px" />
+            <el-table-column prop="imgPath" label="图片路径" min-width="300px" />
+            <el-table-column prop="author" label="上传者" width="150px" />
             <el-table-column prop="submitTime" label="提交时间" width="200px" />
             <el-table-column label="操作" fixed="right" width="100px">
                 <template #default="scope">
@@ -51,7 +51,7 @@ getTableData();
 
 // --------删除--------
 const handleDelete = (index: number, row: any) => {
-    console.log("row", row.id);
+    // console.log("row", row.id);
 
     // 弹窗确认
     ElMessageBox.confirm("确认删除轮播图“" + row.id + "”？", "提示", {

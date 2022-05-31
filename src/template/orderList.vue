@@ -39,8 +39,6 @@ const currentPage = ref(1);
 const disabled = ref(true);
 
 const handleDetails = (index: number, row: order) => {
-    // console.log("index", index);
-    // console.log("row", row.id);
     userRouter.push({ path: "/order", query: { orderId: row.id } });
 };
 const getTableData = async (state: number | undefined) => {

@@ -20,7 +20,7 @@
                     <!-- <img :src="scope.row.coverPath" style="width: 100px; height: 100px;"> -->
                 </template>
             </el-table-column>
-            <el-table-column prop="author" label="上传者" width="100px" />
+            <el-table-column prop="author" label="上传者" width="150px" />
             <el-table-column prop="createTime" label="创建时间" width="200px" sortable />
             <el-table-column prop="updateTime" label="修改时间" width="200px" sortable />
             <el-table-column label="操作" fixed="right" width="150px">
@@ -65,16 +65,12 @@ const getArticleList = async () => {
 getArticleList();
 
 // --------跳转修改--------
-// TODO: 跳转修改页面
 const handleRevise = (index: number, row: any) => {
-    // console.log("index", index);
-    // console.log("row", row);
     // 跳转
     router.push({ path: "/article", query: { articleId: row.id } });
 };
 
 // --------删除--------
-// TODO: 删除用户按钮实现
 const handleDelete = (index: number, row: articleParam) => {
     // 弹窗确认
     ElMessageBox.confirm("确认删除文章“" + row.title + "”？", "提示", {
