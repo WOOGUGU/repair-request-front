@@ -14,10 +14,6 @@
                 <el-form-item label="工单类型">
                     <el-select class=select v-model="orderTable.type" placeholder="please select your zone"
                         :disabled="orderDisabled.orderInformation">
-                        <el-option label="有线网络无法拨号" value="1" />
-                        <el-option label="无线网络没有弹窗" value="2" />
-                        <el-option label="不能拨号" value="22" />
-                        <el-option label="其他" value="8" />
                     </el-select>
                 </el-form-item>
                 <el-form-item label="创建人">
@@ -31,25 +27,11 @@
                 <el-form-item label="故障位置">
                     <el-select class=select v-model="orderTable.type" placeholder="please select your zone"
                         :disabled="orderDisabled.orderInformation">
-                        <el-option label="其他" value="1" />
-                        <el-option label="七教" value="2" />
-                        <el-option label="行政楼" value="3" />
-                        <el-option label="科技楼" value="4" />
-                        <el-option label="大学生活动中心" value="5" />
-                        <el-option label="北十" value="9" />
-                        <el-option label="西六" value="10" />
-                        <el-option label="2栋" value="11" />
-                        <el-option label="1" value="12" />
                     </el-select>
                 </el-form-item>
                 <el-form-item label="预约时间">
                     <el-select class=select v-model="orderTable.timeSubscribe" placeholder="please select your zone"
                         :disabled="orderDisabled.orderInformation">
-                        <el-option label="12:00-12:30" value="1" />
-                        <el-option label="12:30-13:00" value="2" />
-                        <el-option label="08:00-08:30" value="3" />
-                        <el-option label="09:40-09:55" value="4" />
-                        <el-option label="10:30-16:00" value="5" />
                     </el-select>
                 </el-form-item>
                 <el-form-item label="故障描述">
@@ -98,36 +80,35 @@
                 <el-form-item label="管理员工号">
                     <!-- <el-input class=input v-model="orderTable.solver" placeholder="Please input"
                         :disabled="orderDisabled.adminInformation" /> -->
-                    <el-input class="input" placeholder="暂不记录管理员信息" :disabled="orderDisabled.orderInformation" />
+                    <el-input class="input" placeholder="暂不记录管理员信息" disabled />
                 </el-form-item>
                 <el-form-item label="选择维修员">
                     <el-select class=select v-model="orderTable.solver" placeholder="请选择维修员"
                         :disabled="orderDisabled.adminInformation">
                         <el-option v-for="repairman, item in repairmanList"
-                            :label="repairman.username + ' : ' + repairman.name"
+                            :label="repairman.name + ' ' + repairman.username"
                             :value="(repairman.username as string)" />
                     </el-select>
                 </el-form-item>
-                <el-form-item label="管理员留言">
+                <el-form-item v-if="!orderDisabled.isRepair || !orderDisabled.isRepair" label="管理员留言">
                     <el-input class=textInput v-model="orderTable.remark" autosize type="textarea"
                         :disabled="orderDisabled.adminInformation" />
                 </el-form-item>
-                <!-- XXX: 暂不记录驳回时间，直接判断是否有时间信息 -->
-                <!-- <el-form-item v-if="orderDisabled.adminInformation" label="审批时间">
-                    <el-input class=textInput v-model="orderTable.timeDistribution" placeholder="Please input"
-                        :disabled="orderDisabled.adminInformation" />
-                </el-form-item> -->
+                <!-- XXX: 直接判断是否有时间信息 -->
                 <el-form-item v-if="orderTable.timeDistribution != undefined" label="审批时间">
                     <el-input class=textInput v-model="orderTable.timeDistribution" placeholder="Please input"
                         :disabled="orderDisabled.adminInformation" />
                 </el-form-item>
-                <el-form-item v-if="!orderDisabled.adminInformation">
+                <el-form-item v-if="orderDisabled.isCheck">
                     <el-button type="primary" @click="adminInformationClick" plain>分配</el-button>
                     <el-button type="danger" @click="orderReject" plain>驳回</el-button>
                 </el-form-item>
+                <el-form-item v-if="orderDisabled.isRepair">
+                    <el-button type="warning" @click="changeRepairman" plain>重新分配</el-button>
+                </el-form-item>
             </el-card>
 
-            <el-card v-if="!orderDisabled.repairmanInformation">
+            <el-card v-if="orderDisabled.isFinish">
                 <template #header>
                     <div class="card-header">
                         <span>维修信息</span>
@@ -175,7 +156,11 @@ let orderDisabled = ref({
     orderInformation: true,
     userInformation: true,
     adminInformation: true,
-    repairmanInformation: true
+    repairmanInformation: true,
+    isCheck: false,
+    isRepair: false,
+    isFinish: false,
+    isReject: false,
 })
 
 // 获取指定工单
@@ -194,15 +179,30 @@ const getTableData = async (orderId: number | undefined) => {
         }
     }
 
-    if (res.data.list[0].progress === 0) {
-        orderDisabled.value.adminInformation = false;
-    } else if (res.data.list[0].progress === 1) {
-        orderDisabled.value.repairmanInformation = false;
+    switch (orderTable.value.progress) {
+        case 0:
+            // 待审核
+            orderDisabled.value.isCheck = true;
+            orderDisabled.value.adminInformation = false;
+            break;
+        case 1:
+            // 待维修
+            orderDisabled.value.isRepair = true;
+            orderDisabled.value.adminInformation = false;
+            break;
+        case 2:
+            // 已完成
+            orderDisabled.value.isFinish = true;
+            break;
+        case 3:
+            // 已驳回
+            orderDisabled.value.isReject = true;
+            break;
     }
-    // console.log("orderTable", orderTable.value);
+    console.log("orderTable", orderTable.value);
     // console.log("fileList", fileList.value);
     // console.log("imgPathList", imgPathList.value);
-    // console.log("orderDisabled", orderDisabled.value);
+    console.log("orderDisabled", orderDisabled.value);
 };
 
 getTableData(Number(route.query.orderId));
@@ -261,6 +261,26 @@ const orderReject = async () => {
         ElMessage({ showClose: true, message: "驳回失败：" + res.userMsg, type: "error", duration: 1000 });
     }
 }
+// --------修改维修员--------
+const changeRepairman = async () => {
+    // FIXME: 表单校验
+    let rs: adminDealOrder = {
+        orderId: orderTable.value.id,
+        solver: orderTable.value.solver,
+    };
+    const res = await sendRepairman(rs);
+    // console.log("res", res);
+    if (res.code === "00000") {
+        ElMessage({ showClose: true, message: "分配成功~", type: "success", duration: 1000 });
+        // FIXME: 刷新页面改为页面回退/刷新组件
+        setTimeout(() => {
+            location.reload();
+        }, 1100);
+    } else {
+        ElMessage({ showClose: true, message: "分配失败：" + res.userMsg, type: "error", duration: 1000 });
+    }
+}
+
 </script>
 
 <style lang="less" scoped>
