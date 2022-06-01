@@ -56,7 +56,7 @@ const handleDelete = async (index: number, row: pickerLocationParams) => {
         type: 'warning',
     }).then(async () => {
         let params: pickerLocationParams = {
-            id: row.id,
+            pickerId: row.id,
         };
         let res = await deletePickerLocation(params);
         // console.log("res:", res);

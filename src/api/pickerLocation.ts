@@ -24,7 +24,7 @@ export const addPickerLocation = (rs: pickerLocationParams) => {
     return request({
         url: '/v2/picker/addPickerLocation',
         method: 'post',
-        data: qs.stringify(rs)
+        data: rs
     })
 }
 
