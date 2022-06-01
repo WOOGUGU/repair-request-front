@@ -16,43 +16,35 @@ const routes = [
         path: "/home",
         name: "home",
         component: () => import("../views/home/index.vue"),
-      },
-      {
+      }, {
         path: "/repairOrder",
         name: "repairOrder",
         component: () => import("../views/orderList/repairOrder/index.vue"),
-      },
-      {
+      }, {
         path: "/completeOrder",
         name: "completeOrder",
         component: () => import("../views/orderList/completeOrder/index.vue"),
-      },
-      {
+      }, {
         path: "/reviewOrder",
         name: "reviewOrder",
         component: () => import("../views/orderList/reviewOrder/index.vue"),
-      },
-      {
+      }, {
         path: "/rejectOrder",
         name: "rejectOrder",
         component: () => import("../views/orderList/rejectOrder/index.vue"),
-      },
-      {
+      }, {
         path: "/order",
         name: "order",
         component: () => import("../views/order/index.vue"),
-      },
-      {
+      }, {
         path: "/adminList",
         name: "adminList",
         component: () => import("../views/userList/adminList/index.vue"),
-      },
-      {
+      }, {
         path: "/repairmanList",
         name: "repairmanList",
         component: () => import("../views/userList/repairmanList/index.vue"),
-      },
-      {
+      }, {
         path: "/norUserList",
         name: "norUserList",
         component: () => import("../views/userList/norUserList/index.vue"),
@@ -60,43 +52,35 @@ const routes = [
         path: "/user",
         name: "user",
         component: () => import("../views/user/index.vue"),
-      },
-      {
+      }, {
         path: "/addUser",
         name: "addUser",
         component: () => import("../views/addUser/index.vue"),
-      },
-      {
+      }, {
         path: "/carouselList",
         name: "carouselList",
         component: () => import("../views/carouselList/index.vue"),
-      },
-      {
+      }, {
         path: "/carousel",
         name: "carousel",
         component: () => import("../views/carousel/index.vue"),
-      },
-      {
+      }, {
         path: "/noticeList",
         name: "noticeList",
         component: () => import("../views/noticeList/index.vue"),
-      },
-      {
+      }, {
         path: "/notice",
         name: "notice",
         component: () => import("../views/notice/index.vue"),
-      },
-      {
+      }, {
         path: "/addNotice",
         name: "addNotice",
         component: () => import("../views/addNotice/index.vue"),
-      },
-      {
+      }, {
         path: "/articleList",
         name: "articleList",
         component: () => import("../views/articleList/index.vue"),
-      },
-      {
+      }, {
         path: "/article",
         name: "article",
         component: () => import("../views/article/index.vue"),
@@ -104,6 +88,22 @@ const routes = [
         path: "/addArticle",
         name: "addArticle",
         component: () => import("../views/addArticle/index.vue"),
+      }, {
+        path: "/pickerTime",
+        name: "pickerTime",
+        component: () => import("../views/picker/pickerTime/index.vue"),
+      }, {
+        path: "/pickerLocation",
+        name: "pickerLocation",
+        component: () => import("../views/picker/pickerLocation/index.vue"),
+      }, {
+        path: "/pickerDes",
+        name: "pickerDes",
+        component: () => import("../views/picker/pickerDes/index.vue"),
+      }, {
+        path: "/addPickerDes",
+        name: "addPickerDes",
+        component: () => import("../views/picker/addPickerDes/index.vue"),
       }
     ],
   },

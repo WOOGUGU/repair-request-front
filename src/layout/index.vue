@@ -148,6 +148,39 @@
               <span>添加文章</span>
             </el-menu-item>
           </el-sub-menu>
+          <!-- 选框管理 -->
+          <el-sub-menu index="7">
+            <template #title>
+              <el-icon>
+                <refrigerator />
+              </el-icon>
+              <span>选框管理</span>
+            </template>
+            <el-menu-item index="7-1" class="children" @click="savePath('pickerTime')">
+              <el-icon>
+                <clock />
+              </el-icon>
+              <span>上门时间段</span>
+            </el-menu-item>
+            <el-menu-item index="7-2" class="children" @click="savePath('pickerLocation')">
+              <el-icon>
+                <location />
+              </el-icon>
+              <span>报修地点</span>
+            </el-menu-item>
+            <el-menu-item index="7-3" class="children" @click="savePath('pickerDes')">
+              <el-icon>
+                <price-tag />
+              </el-icon>
+              <span>故障类型</span>
+            </el-menu-item>
+            <el-menu-item index="7-4" class="children" @click="savePath('addPickerDes')">
+              <el-icon>
+                <plus />
+              </el-icon>
+              <span>添加故障类型</span>
+            </el-menu-item>
+          </el-sub-menu>
           <!-- 面板设置 -->
           <el-menu-item index="999" disabled>
             <el-icon>
@@ -200,7 +233,7 @@ import { ref } from "vue";
 import { mainStore } from "@/store";
 import {
   HelpFilled, House, Document, CirclePlus, Clock, CircleCheck, CircleClose,
-  User, Setting, Postcard, Fold, Expand, ArrowDown, Picture, Files, Bell, Collection, Plus
+  User, Setting, Postcard, Fold, Expand, ArrowDown, Picture, Files, Bell, Collection, Plus, Refrigerator, Location, PriceTag
 } from "@element-plus/icons-vue";
 import router from "@/router";
 
