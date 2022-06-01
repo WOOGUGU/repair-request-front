@@ -93,6 +93,10 @@ const routes = [
         name: "pickerTime",
         component: () => import("../views/picker/pickerTime/index.vue"),
       }, {
+        path: "/addPickerTime",
+        name: "addPickerTime",
+        component: () => import("../views/picker/addPickerTime/index.vue"),
+      },{
         path: "/pickerLocation",
         name: "pickerLocation",
         component: () => import("../views/picker/pickerLocation/index.vue"),

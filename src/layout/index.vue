@@ -162,19 +162,31 @@
               </el-icon>
               <span>上门时间段</span>
             </el-menu-item>
-            <el-menu-item index="7-2" class="children" @click="savePath('pickerLocation')">
+            <el-menu-item index="7-2" class="children" @click="savePath('addPickerTime')">
+              <el-icon>
+                <plus />
+              </el-icon>
+              <span>添加上门时间段</span>
+            </el-menu-item>
+            <el-menu-item index="7-3" class="children" @click="savePath('pickerLocation')">
               <el-icon>
                 <location />
               </el-icon>
               <span>报修地点</span>
             </el-menu-item>
-            <el-menu-item index="7-3" class="children" @click="savePath('pickerDes')">
+            <el-menu-item index="7-4" class="children" @click="savePath('addPickerLocation')">
+              <el-icon>
+                <plus />
+              </el-icon>
+              <span>添加报修地点</span>
+            </el-menu-item>
+            <el-menu-item index="7-5" class="children" @click="savePath('pickerDes')">
               <el-icon>
                 <price-tag />
               </el-icon>
               <span>故障类型</span>
             </el-menu-item>
-            <el-menu-item index="7-4" class="children" @click="savePath('addPickerDes')">
+            <el-menu-item index="7-6" class="children" @click="savePath('addPickerDes')">
               <el-icon>
                 <plus />
               </el-icon>
