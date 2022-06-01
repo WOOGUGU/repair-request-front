@@ -82,7 +82,7 @@
                         :disabled="orderDisabled.adminInformation" /> -->
                     <el-input class="input" placeholder="暂不记录管理员信息" disabled />
                 </el-form-item>
-                <el-form-item label="选择维修员">
+                <el-form-item v-if="orderDisabled.isCheck || orderDisabled.isRepair" label="选择维修员">
                     <el-select class=select v-model="orderTable.solver" placeholder="请选择维修员"
                         :disabled="orderDisabled.adminInformation">
                         <el-option v-for="repairman, item in repairmanList"
@@ -90,14 +90,14 @@
                             :value="(repairman.username as string)" />
                     </el-select>
                 </el-form-item>
-                <el-form-item v-if="!orderDisabled.isRepair || !orderDisabled.isRepair" label="管理员留言">
+                <el-form-item v-if="orderDisabled.isCheck || orderDisabled.isReject" label="管理员留言">
                     <el-input class=textInput v-model="orderTable.remark" autosize type="textarea"
                         :disabled="orderDisabled.adminInformation" />
                 </el-form-item>
                 <!-- XXX: 直接判断是否有时间信息 -->
                 <el-form-item v-if="orderTable.timeDistribution != undefined" label="审批时间">
                     <el-input class=textInput v-model="orderTable.timeDistribution" placeholder="Please input"
-                        :disabled="orderDisabled.adminInformation" />
+                        disabled />
                 </el-form-item>
                 <el-form-item v-if="orderDisabled.isCheck">
                     <el-button type="primary" @click="adminInformationClick" plain>分配</el-button>
@@ -194,7 +194,7 @@ const getTableData = async (orderId: number | undefined) => {
             // 已完成
             orderDisabled.value.isFinish = true;
             break;
-        case 3:
+        case 4:
             // 已驳回
             orderDisabled.value.isReject = true;
             break;
