@@ -87,7 +87,7 @@ export const updateUser = (rs: userParam) => {
 // 添加用户
 export const addUser = (rs: any) => {
     // 对密码加密
-    rs.password = md5(rs.password1 as string);
+    rs.password = md5(rs.password1 as string).toUpperCase();
     // console.log("rs", rs);
     let res = request({
         headers: {
