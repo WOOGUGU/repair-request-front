@@ -4,8 +4,8 @@
         <el-divider />
         <el-table :data="filterTableData" style="width: 100%">
             <el-table-column label="id" prop="id" width="100" />
-            <el-table-column label="区域" prop="area" min-width="200" />
-            <el-table-column label="位置" prop="position" min-width="200" />
+            <el-table-column label="区域" prop="area" min-width="200" sortable />
+            <el-table-column label="位置" prop="position" min-width="200" sortable />
             <el-table-column label="操作" fixed="right" width="100">
                 <template #default="scope">
                     <el-button type="danger" @click="handleDelete(scope.$index, scope.row)" size="small" plain>
