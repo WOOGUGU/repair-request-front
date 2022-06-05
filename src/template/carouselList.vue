@@ -1,7 +1,9 @@
 <template>
     <el-card>
-        <el-table :data="tableData" style="width: 100%">
-            <el-table-column prop="id" label="编号" width="85px" />
+        <el-input v-model="search" placeholder="输入查询的用户名" style="width: 200px" :prefix-icon="Search" clearable />
+        <el-divider />
+        <el-table :data="filterTableData" style="width: 100%">
+            <el-table-column prop="id" label="编号" width="85px" sortable />
             <el-table-column label="图片预览" width="150px">
                 <!-- TODO: 点击图片放大 -->
                 <template #default="scope">
@@ -9,8 +11,8 @@
                 </template>
             </el-table-column>
             <el-table-column prop="imgPath" label="图片路径" min-width="300px" />
-            <el-table-column prop="author" label="上传者" width="150px" />
-            <el-table-column prop="submitTime" label="提交时间" width="200px" />
+            <el-table-column prop="author" label="上传者" width="150px" sortable />
+            <el-table-column prop="submitTime" label="提交时间" width="200px" sortable />
             <el-table-column label="操作" fixed="right" width="100px">
                 <template #default="scope">
                     <el-button type="danger" @click="handleDelete(scope.$index, scope.row)" size="small" plain>
@@ -26,7 +28,8 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, ref } from 'vue';
+import { Ref, ref, computed } from "vue";
+import { Search } from '@element-plus/icons-vue'
 import { carouselParam, selectCarouselList, deleteCarousel } from '@/api/carousel';
 import { ElMessage, ElMessageBox } from "element-plus";
 
@@ -35,12 +38,11 @@ const currentPage = ref(1);
 const disabled = ref(true);
 
 // 获取轮播图列表
-// FIXME： 请求方法不对，暂时用下面的方法代替
+// XXX 不需分页查，请求方法不恰当，暂时用下面的方法代替
 const getTableData = async () => {
     let params: carouselParam = {
-        // TODO: 需绑定分页
         pageNum: 1,
-        pageSize: 999,
+        pageSize: 9999,
     };
     let res = await selectCarouselList(params);
     // console.log("res:", res);
@@ -48,6 +50,15 @@ const getTableData = async () => {
 };
 
 getTableData();
+
+// 筛选用列表
+const search = ref('')
+const filterTableData = computed(() =>
+    tableData.value.filter(
+        (data) =>
+            !search.value || data.author.toLowerCase().includes(search.value.toLowerCase())
+    )
+)
 
 // --------删除--------
 const handleDelete = (index: number, row: any) => {
