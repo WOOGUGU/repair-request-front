@@ -1,6 +1,7 @@
 import request from "./request";
 import md5 from "js-md5";
 import qs from "qs";
+import { rmSync } from "fs";
 
 // 人员通用格式
 export interface userParam {
@@ -14,7 +15,21 @@ export interface userParam {
     pageSize?: number,
     roleTypes?: string[],
     userId?: number,
+    roleId?: number,
 }
+
+// 查找用户列表——通用接口
+export const selectUser = (rs?: userParam) => {
+    console.log("selectUser", rs);
+    return request({
+        headers: {
+            "Content-Type": "application/json;",
+        },
+        url: "/v2/user/selectUser",
+        method: "get",
+        params: rs
+    });
+};
 
 // 查找管理员列表
 export const selectAdminList = (rs?: userParam) => {

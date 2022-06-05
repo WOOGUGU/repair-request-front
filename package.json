@@ -11,6 +11,7 @@
     "@element-plus/icons-vue": "^1.1.4",
     "@types/node": "^17.0.23",
     "@types/qs": "^6.9.7",
+    "all": "^0.0.0",
     "axios": "^0.26.1",
     "element-plus": "^2.1.7",
     "js-md5": "^0.7.3",
