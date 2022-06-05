@@ -1,8 +1,8 @@
 <template>
     <el-card>
-        <el-table :data="tableData" style="width: 100%">
+        <el-table :data="tableData" table-layout="auto" style="width: 100%">
             <el-table-column label="id" prop="id" width="100" />
-            <el-table-column label="描述" prop="picker" min-width="200" />
+            <el-table-column label="时间段" prop="picker" min-width="200" sortable />
             <el-table-column label="操作" fixed="right" width="100">
                 <template #default="scope">
                     <el-button type="danger" @click="handleDelete(scope.$index, scope.row)" size="small" plain>
