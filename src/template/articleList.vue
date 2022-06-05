@@ -20,7 +20,7 @@
                     <!-- <img :src="scope.row.coverPath" style="width: 100px; height: 100px;"> -->
                 </template>
             </el-table-column>
-            <el-table-column prop="author" label="上传者" width="150px" />
+            <el-table-column prop="author" label="上传者" width="150px" sortable />
             <el-table-column prop="createTime" label="创建时间" width="200px" sortable />
             <el-table-column prop="updateTime" label="修改时间" width="200px" sortable />
             <el-table-column label="操作" fixed="right" width="150px">
