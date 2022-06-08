@@ -10,8 +10,8 @@
           <h3 v-if="!collapse">网络报修系统</h3>
         </div>
         <el-menu default-active="2" class="el-menu-vertical-demo" mode="vertical" :collapse="collapse"
-          :collapse-transition="collapseTransition" background-color="#cfd7e2" :default-active="defaultActive"
-          active-text-color="#626aef">
+          :unique-opened="true" :collapse-transition="collapseTransition" background-color="#cfd7e2"
+          :default-active="defaultActive" active-text-color="#626aef">
           <!-- 首页 -->
           <el-menu-item index="1" @click="savePath('home')">
             <el-icon>
