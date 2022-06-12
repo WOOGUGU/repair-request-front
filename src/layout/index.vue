@@ -209,7 +209,7 @@
         <el-header>
           <div class="header">
             <div class="main-body">
-              <el-icon @click="changeCollapse" :size="22">
+              <el-icon @click="changeCollapse" size="22">
                 <Fold v-if="!collapse" />
                 <expand v-if="collapse" />
               </el-icon>
@@ -223,8 +223,7 @@
                 <template #dropdown>
                   <el-dropdown-menu>
                     <el-dropdown-item>查看</el-dropdown-item>
-                    <el-dropdown-item>新增</el-dropdown-item>
-                    <el-dropdown-item>删除</el-dropdown-item>
+                    <el-dropdown-item @click="handleLogout">退出登录</el-dropdown-item>
                   </el-dropdown-menu>
                 </template>
               </el-dropdown>
@@ -247,7 +246,9 @@ import {
   HelpFilled, House, Document, CirclePlus, Clock, CircleCheck, CircleClose,
   User, Setting, Postcard, Fold, Expand, ArrowDown, Picture, Files, Bell, Collection, Plus, Refrigerator, Location, PriceTag
 } from "@element-plus/icons-vue";
+import { ElMessageBox } from "element-plus";
 import router from "@/router";
+import { logout } from "@/api/logout"
 
 var collapse = ref<boolean>(false);
 var collapseTransition = ref<boolean>(false);
@@ -266,6 +267,26 @@ const savePath = (path: string) => {
   sessionStorage.setItem("path", `/${path}`);
   router.push(sessionStorage.path);
 };
+
+// 点击登出
+const handleLogout = async () => {
+  console.log("logout");
+  // 弹窗提示
+  ElMessageBox.confirm("是否要退出当前用户登录状态？", "提示", {
+    confirmButtonText: '确认退出',
+    cancelButtonText: '取消',
+    type: 'error',
+  }).then(async () => {
+    const res = await logout();
+    if (res.code === "00000") {
+      store.userName = "";
+      store.userNumber = "";
+      store.telephoneNumber = "";
+      router.push("/login");
+    }
+  })
+}
+
 </script>
 
 <style lang="less" scoped>
