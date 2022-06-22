@@ -4,9 +4,12 @@
       <!-- 左侧栏 -->
       <el-aside :style="{ width: asideWidth }">
         <div class="mb-2">
-          <el-icon :size="25">
+          <!-- <el-icon :size="25">
             <help-filled />
-          </el-icon>
+          </el-icon> -->
+          <div class="logo-div">
+            <img class="logo" :src="logo">
+          </div>
           <h3 v-if="!collapse">网络报修系统</h3>
         </div>
         <el-menu default-active="2" class="el-menu-vertical-demo" mode="vertical" :collapse="collapse"
@@ -241,6 +244,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import logo from "../../public/IT-logo-1.1.ico";
 import { mainStore } from "@/store";
 import {
   HelpFilled, House, Document, CirclePlus, Clock, CircleCheck, CircleClose,
@@ -298,9 +302,25 @@ const handleLogout = async () => {
 
     .mb-2 {
       height: 60px;
+      width: 180px;
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: space-around;
+
+      .logo-div {
+        width: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .logo {
+          width: 26px;
+          height: 26px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
     }
 
     .children {
