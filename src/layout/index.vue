@@ -3,7 +3,7 @@
     <el-container>
       <!-- 左侧栏 -->
       <el-aside :style="{ width: asideWidth }">
-        <div class="mb-2">
+        <div class="mb-2" :style="{ width: logoWidth }">
           <!-- <el-icon :size="25">
             <help-filled />
           </el-icon> -->
@@ -244,7 +244,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import logo from "../../public/IT-logo-1.1.ico";
+import logo from "../../public/IT-logo-1.ico";
 import { mainStore } from "@/store";
 import {
   HelpFilled, House, Document, CirclePlus, Clock, CircleCheck, CircleClose,
@@ -257,6 +257,7 @@ import { logout } from "@/api/logout"
 var collapse = ref<boolean>(false);
 var collapseTransition = ref<boolean>(false);
 var asideWidth = ref("200px");
+var logoWidth = ref("177px")
 const store = mainStore();
 const userName = store.userName !== "" ? store.userName : "username";
 const defaultActive = sessionStorage.getItem("path") || "/home";
@@ -264,6 +265,7 @@ const defaultActive = sessionStorage.getItem("path") || "/home";
 const changeCollapse = () => {
   collapse.value = !collapse.value;
   asideWidth.value = asideWidth.value === "200px" ? "64px" : "200px";
+  logoWidth.value = logoWidth.value === "177px" ? "64px" : "177px";
   console.log(collapse.value);
 };
 
@@ -302,7 +304,7 @@ const handleLogout = async () => {
 
     .mb-2 {
       height: 60px;
-      width: 180px;
+      // width: 180px;
       display: flex;
       justify-content: center;
       align-items: space-around;
@@ -316,9 +318,6 @@ const handleLogout = async () => {
         .logo {
           width: 26px;
           height: 26px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
         }
       }
     }
