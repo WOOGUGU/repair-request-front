@@ -228,6 +228,7 @@ const adminInformationClick = async () => {
     let rs: adminDealOrder = {
         orderId: orderTable.value.id,
         solver: orderTable.value.solver,
+        remark: orderTable.value.remark,
     };
     const res = await sendRepairman(rs);
     // console.log("res", res);
@@ -248,6 +249,7 @@ const orderReject = async () => {
     let rs: adminDealOrder = {
         orderId: orderTable.value.id,
         remark: orderTable.value.remark,
+        progress: 4,
     };
     const res = await checkOrder(rs);
     // console.log("res", res);

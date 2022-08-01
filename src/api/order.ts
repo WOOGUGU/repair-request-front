@@ -52,7 +52,6 @@ export const sendRepairman = (rs: adminDealOrder) => {
 
 // 驳回工单
 export const checkOrder = (rs: adminDealOrder) => {
-  rs.progress = 4;
   // console.log("checkOrder-rs", rs);
   let res = request({
     headers: {
