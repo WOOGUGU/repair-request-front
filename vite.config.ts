@@ -16,6 +16,7 @@ export default defineConfig({
   base: './',
 
   server: {
+    port: 8888,
     // 反向代理
     proxy: {
       "/api-dev": {

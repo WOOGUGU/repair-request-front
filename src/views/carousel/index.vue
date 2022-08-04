@@ -37,7 +37,6 @@ const dialogVisible = ref(false)
 
 
 // 上传图片按钮
-// FIXME： 上传逻辑需要优化，不能直接上传到服务器，需要先获取COS相关信息，再直接上传到COS服务器中
 const uploadImg = async () => {
     // console.log("fileList", fileList.value)
     // list转formdata

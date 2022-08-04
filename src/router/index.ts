@@ -63,7 +63,7 @@ const routes = [
       }, {
         path: "/carousel",
         name: "carousel",
-        component: () => import("../views/carousel/index.vue"),
+        component: () => import("../views/carousel/index2.vue"),
       }, {
         path: "/noticeList",
         name: "noticeList",
