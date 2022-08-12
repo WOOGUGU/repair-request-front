@@ -82,8 +82,8 @@ const submitForm = (formEl: FormInstance | undefined) => {
 @tableHeight: 60px;
 
 .login {
-  // background: url('@/assets/images/login-background-1.jpg') no-repeat;
-  background: url('@/assets/images/login-background-2.jpg') no-repeat;
+  background: url('@/assets/images/login-background-1.jpg') no-repeat;
+  // background: url('@/assets/images/login-background-2.jpg') no-repeat;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -96,14 +96,14 @@ const submitForm = (formEl: FormInstance | undefined) => {
 }
 
 .mask {
-  // // background: rgba(87, 105, 128, 0.349);
-  // background-image: linear-gradient(0deg, rgba(49, 40, 84, 0) 0%, rgba(87, 105, 128, 0.75) 100%);
-  // height: 380px;
-  // width: 600px;
-  // border-radius: 8px;
-  background: rgba(0, 0, 0, 0.349);
-  width: 100%;
-  height: 100%;
+  // background: rgba(87, 105, 128, 0.349);
+  background-image: linear-gradient(0deg, rgba(49, 40, 84, 0) 0%, rgba(87, 105, 128, 0.75) 100%);
+  height: 380px;
+  width: 600px;
+  border-radius: 8px;
+  // background: rgba(0, 0, 0, 0.349);
+  // width: 100%;
+  // height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
