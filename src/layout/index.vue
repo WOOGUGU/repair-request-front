@@ -244,7 +244,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import logo from "../../public/IT-logo-1.ico";
+import logo from "@/assets/logo/IT-logo-1.ico";
 import { mainStore } from "@/store";
 import {
   HelpFilled, House, Document, CirclePlus, Clock, CircleCheck, CircleClose,
