@@ -1,24 +1,28 @@
 <template>
   <div class="login">
-    <el-form ref="ruleFormRef" :model="loginTable" :rules="rules" class="form">
-      <el-form-item class="item">
-        <h2 class="title">用户登入</h2>
-      </el-form-item>
+    <div class="mask">
+      <el-form ref="ruleFormRef" :model="loginTable" :rules="rules" class="form">
+        <el-form-item class="item">
+          <h1 class="login-title">用户登入</h1>
+        </el-form-item>
 
-      <el-form-item class="item" prop="usernumber">
-        <el-input class="input" :prefix-icon="User" v-model="loginTable.usernumber" placeholder="请输入工号/学号" />
-      </el-form-item>
+        <el-form-item class="item" prop="usernumber">
+          <el-input class="login-input" size="large" :prefix-icon="User" v-model="loginTable.usernumber"
+            placeholder="请输入工号/学号" />
+        </el-form-item>
 
-      <el-form-item class="item" prop="password">
-        <el-input class="input" :prefix-icon="Key" v-model="loginTable.password" type="password" placeholder="请输入密码"
-          show-password />
-      </el-form-item>
+        <el-form-item class="item" prop="password">
+          <el-input class="login-input" size="large" :prefix-icon="Key" v-model="loginTable.password" type="password"
+            placeholder="请输入密码" show-password />
+        </el-form-item>
 
-      <el-form-item class="item">
-        <el-button class="button" type="primary" @click="submitForm(ruleFormRef)">登入
-        </el-button>
-      </el-form-item>
-    </el-form>
+        <el-form-item class="item">
+          <el-button class="login-button" color="#626aef" size="large" type="primary" @click="submitForm(ruleFormRef)">
+            登入
+          </el-button>
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
 </template>
 
@@ -75,10 +79,29 @@ const submitForm = (formEl: FormInstance | undefined) => {
 
 <style lang="less" scoped>
 @tableWidth: 70%;
-@tableHeight: 12%;
+@tableHeight: 60px;
 
 .login {
-  background-color: #e2e2e2;
+  // background: url('@/assets/images/login-background-1.jpg') no-repeat;
+  background: url('@/assets/images/login-background-2.jpg') no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mask {
+  // // background: rgba(87, 105, 128, 0.349);
+  // background-image: linear-gradient(0deg, rgba(49, 40, 84, 0) 0%, rgba(87, 105, 128, 0.75) 100%);
+  // height: 380px;
+  // width: 600px;
+  // border-radius: 8px;
+  background: rgba(0, 0, 0, 0.349);
   width: 100%;
   height: 100%;
   display: flex;
@@ -87,10 +110,8 @@ const submitForm = (formEl: FormInstance | undefined) => {
 }
 
 .form {
-  height: 300px;
-  width: 500px;
-  background-color: #f4f4f4;
-  border-radius: 15px;
+  height: 400px;
+  width: 600px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -100,15 +121,22 @@ const submitForm = (formEl: FormInstance | undefined) => {
     width: @tableWidth;
     height: @tableHeight;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 
-    .title {
-      letter-spacing: 0.2em;
+    .login-title {
+      color: rgb(182, 184, 216);
+      width: 100%;
+      height: 50px;
+      letter-spacing: 10px;
     }
 
-    .button {
+    .login-button {
       width: 100%;
+      height: 45px;
+      font-size: 118%;
+      letter-spacing: 20px;
+      justify-content: center;
     }
   }
 }
