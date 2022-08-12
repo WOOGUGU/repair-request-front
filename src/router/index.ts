@@ -112,6 +112,14 @@ const routes = [
         path: "/addPickerDes",
         name: "addPickerDes",
         component: () => import("../views/picker/addPickerDes/index.vue"),
+      }, {
+        path: "/feedback",
+        name: "feedback",
+        component: () => import("@/views/feedback/index.vue"),
+      }, {
+        path: "/addFeedback",
+        name: "addFeedback",
+        component: () => import("@/views/addFeedback/index.vue"),
       }
     ],
   },

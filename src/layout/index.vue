@@ -196,6 +196,21 @@
               <span>添加故障类型</span>
             </el-menu-item>
           </el-sub-menu>
+          <!-- 反馈 -->
+          <el-sub-menu index="8">
+            <template #title>
+              <el-icon>
+                <house />
+              </el-icon>
+              <span>反馈管理</span>
+            </template>
+            <el-menu-item index="8-1" class="children" @click="savePath('feedback')">
+              <el-icon>
+                <house />
+              </el-icon>
+              <span>反馈列表</span>
+            </el-menu-item>
+          </el-sub-menu>
           <!-- 面板设置 -->
           <el-menu-item index="999" disabled>
             <el-icon>
