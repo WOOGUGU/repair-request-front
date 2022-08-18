@@ -32,25 +32,25 @@
             </template>
             <el-menu-item index="2-1" class="children" @click="savePath('reviewOrder')">
               <el-icon>
-                <circle-plus />
+                <document-add />
               </el-icon>
               <span>待审核</span>
             </el-menu-item>
             <el-menu-item index="2-2" class="children" @click="savePath('repairOrder')">
               <el-icon>
-                <clock />
+                <document-remove />
               </el-icon>
               <span>待维修</span>
             </el-menu-item>
             <el-menu-item index="2-3" class="children" @click="savePath('completeOrder')">
               <el-icon>
-                <circle-check />
+                <document-checked />
               </el-icon>
               <span>已完成</span>
             </el-menu-item>
             <el-menu-item index="2-4" class="children" @click="savePath('rejectOrder')">
               <el-icon>
-                <circle-close />
+                <document-delete />
               </el-icon>
               <span>已驳回</span>
             </el-menu-item>
@@ -200,13 +200,13 @@
           <el-sub-menu index="8">
             <template #title>
               <el-icon>
-                <house />
+                <chat-line-square />
               </el-icon>
               <span>反馈管理</span>
             </template>
             <el-menu-item index="8-1" class="children" @click="savePath('feedback')">
               <el-icon>
-                <house />
+                <chat-line-square />
               </el-icon>
               <span>反馈列表</span>
             </el-menu-item>
@@ -214,7 +214,7 @@
           <!-- 面板设置 -->
           <el-menu-item index="999" disabled>
             <el-icon>
-              <setting />
+              <help />
             </el-icon>
             <span>面板设置</span>
           </el-menu-item>
@@ -262,8 +262,7 @@ import { ref } from "vue";
 import logo from "@/assets/logo/IT-logo-1.ico";
 import { mainStore } from "@/store";
 import {
-  HelpFilled, House, Document, CirclePlus, Clock, CircleCheck, CircleClose,
-  User, Setting, Postcard, Fold, Expand, ArrowDown, Picture, Files, Bell, Collection, Plus, Refrigerator, Location, PriceTag
+  HelpFilled, House, Document, CirclePlus, Clock, CircleCheck, CircleClose, ChatLineSquare, User, Setting, Postcard, Fold, Expand, ArrowDown, Picture, Files, Bell, Collection, Plus, Refrigerator, Location, PriceTag, DocumentAdd, DocumentDelete, DocumentChecked, DocumentRemove, Help
 } from "@element-plus/icons-vue";
 import { ElMessageBox } from "element-plus";
 import router from "@/router";

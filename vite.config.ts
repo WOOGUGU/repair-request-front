@@ -16,14 +16,15 @@ export default defineConfig({
   base: './',
 
   server: {
-    port: 8888,
+    port: 10086,
     // 反向代理
     proxy: {
       "/api-dev": {
         // target: "https://repair.woogugu.cn/",
         // target: "https://wrz.lty923.com/",
-        target: "https://baoxiu.lty923.com/",
+        // target: "https://baoxiu.lty923.com/",
         // target: "http://192.168.1.101:8090",
+        target: "http://baoxiu1.woogugu.cn/",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api-dev/, ""),
       },
